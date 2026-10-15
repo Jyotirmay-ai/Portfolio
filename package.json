@@ -5,7 +5,7 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "build": "",
+    "build": "echo 'Static build ready'",
     "start": "npx serve ."
   },
   "repository": {
@@ -22,7 +22,7 @@
   "author": "Jyotirmay Biswas",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0"
   }
 }
-
