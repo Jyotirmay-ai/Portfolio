@@ -1,0 +1,13 @@
+# Dependencies & environment
+node_modules/
+.env
+
+# Ignored project files
+HOW_TO_RUN.txt
+
+# OS & Editor generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

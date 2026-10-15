@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jyotirmay Biswas | Certificates</title>
+  <meta name="description"
+    content="3D Tech Career Portfolio Certificates of Jyotirmay Biswas - Aspiring AI Engineer & Data Scientist specializing in RAG, vector search & LLMs.">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="main.js"></script>
+</head>
+
+<body>
+
+  <!-- Cyberpunk Preloader Overlay -->
+  <div id="cyber-preloader">
+    <div class="scanline"></div>
+    <div class="preloader-frame">
+      <div class="preloader-header">
+        <div class="preloader-title">[ SYSTEM INITIALIZATION ]</div>
+        <div class="preloader-percent" id="preloader-percent">0%</div>
+      </div>
+      <div class="preloader-bar-track">
+        <div class="preloader-bar-fill" id="preloader-fill"></div>
+      </div>
+      <div class="preloader-logs" id="preloader-logs"></div>
+      <div class="enter-btn-wrapper">
+        <button id="enter-btn" class="btn-enter-cyber">⚡ ENTER SYSTEM</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Project & Roadmap Modal -->
+  <div id="sim-modal" class="sim-modal-overlay">
+    <div class="sim-modal-card">
+      <span class="sim-modal-close" onclick="closeSimModal()">✖ CLOSE</span>
+      <h3 id="sim-modal-title"
+        style="color:var(--neon-cyan); font-family:var(--font-hud); font-size:1.1rem; margin-bottom:16px;">LIVE
+        SIMULATION</h3>
+      <div class="sim-output-box" id="sim-modal-output"></div>
+      <div style="text-align:right;">
+        <button onclick="closeSimModal()" class="btn-cyber btn-primary" style="padding:6px 16px;">CLOSE WINDOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js WebGL Container & Matrix Rain -->
+  <div id="webgl-container"></div>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="cyber-grid"></div>
+
+  <!-- Toast Copy Notification -->
+  <div id="toast-notice" class="toast-notice"></div>
+
+  <!-- Floating Glass Navbar -->
+  <header class="navbar">
+    <a href="#" class="brand-logo">
+      [JB<span>.DEV</span>]
+    </a>
+
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <nav id="nav-menu" class="nav-menu">
+      <ul class="nav-links">
+        <li><a href="index.html">About</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#terminal">Terminal</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="status-badge" onclick="openCareerGoalModal()" title="Click to view Career Goal & Learning Roadmap">
+          <div class="pulse-dot"></div>
+          Target: AI Engineer 🎯
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Certificates Section -->
+  <section class="section-container" id="certificates">
+    <div class="section-header">
+      <div class="hud-tag">VERIFIED CREDENTIAL ARCHIVE // 20 RECOGNIZED RECORDS</div>
+      <h2 class="section-title">CERTIFICATES & ACHIEVEMENTS</h2>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="cert-filter-container">
+      <button class="cert-filter-btn active" data-filter="all">⚡ All Records <span class="cert-badge-count">20</span></button>
+      <button class="cert-filter-btn" data-filter="ds">🧠 AI & Data Science <span class="cert-badge-count">2</span></button>
+      <button class="cert-filter-btn" data-filter="hackathon">🏆 Hackathons & Tech <span class="cert-badge-count">7</span></button>
+      <button class="cert-filter-btn" data-filter="industry">🛡️ Industry Simulations <span class="cert-badge-count">4</span></button>
+      <button class="cert-filter-btn" data-filter="science">🚀 Space & Conferences <span class="cert-badge-count">4</span></button>
+      <button class="cert-filter-btn" data-filter="academic">🎓 Academic Credentials <span class="cert-badge-count">3</span></button>
+    </div>
+
+    <div class="certificates-grid">
+      <!-- 1. The Ultimate Job Ready Data Science Course -->
+      <div class="certificate-card" data-category="ds">
+        <div>
+          <span class="cert-category-tag tag-ds">AI & DATA SCIENCE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🧠</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">The Ultimate Job Ready Data Science Course</h3>
+              <p class="certificate-issuer">Comprehensive Industry Certification</p>
+              <p class="certificate-date">2026 | Professional Specialization</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            In-depth mastery of Data Science workflows, Python, exploratory data analysis, feature engineering, statistical modeling, and production-grade Machine Learning model training.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/The_Ultimate_Job_Ready_Data_Science_Course_Certificate.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/The_Ultimate_Job_Ready_Data_Science_Course_Certificate.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 2. Kharagpur Data Science Hackathon -->
+      <div class="certificate-card" data-category="ds">
+        <div>
+          <span class="cert-category-tag tag-ds">AI & DATA SCIENCE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🏆</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Kharagpur Data Science Hackathon (KDSH 2026)</h3>
+              <p class="certificate-issuer">IIT Kharagpur (KDSS)</p>
+              <p class="certificate-date">2026 | National Hackathon</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            National level competitive data science hackathon analyzing real-world complex multidimensional datasets, building predictive AI pipelines and ranking architectures.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/KDSH_2026_Jyotirmay_Biswas.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/KDSH_2026_Jyotirmay_Biswas.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 3. Smart India Hackathon (SIH 2026) -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">NATIONAL HACKATHON</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">💡</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Smart India Hackathon (SIH 2026)</h3>
+              <p class="certificate-issuer">Ministry of Education's Innovation Cell (MIC)</p>
+              <p class="certificate-date">2026 | Internal Hackathon</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Selected in premier institutional internal screening for India's largest nationwide hackathon solving critical national governance and computational challenges.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/SIH%202026%20INTERNAL%20HACKATHON.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/SIH%202026%20INTERNAL%20HACKATHON.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 4. IIT Kharagpur - Fugacity 2026 -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">IIT KHARAGPUR</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">⚡</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Fugacity 2026 Technical Fest</h3>
+              <p class="certificate-issuer">Indian Institute of Technology (IIT) Kharagpur</p>
+              <p class="certificate-date">2026 | National Symposium</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Competitive technical event and engineering symposium participation organized by the Department of Chemical & Process Systems at IIT Kharagpur.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/IIT-KGP-FUGACITY-2026_Jyotirmay_Biswas.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/IIT-KGP-FUGACITY-2026_Jyotirmay_Biswas.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 5. Adobe GenSolve Challenge 2026 -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">ADOBE SYSTEMS</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🎨</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Adobe GenSolve Challenge 2026</h3>
+              <p class="certificate-issuer">Adobe Systems</p>
+              <p class="certificate-date">2026 | National Challenge</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Participation in advanced algorithmic problem solving and geometric shape identification challenges developed by Adobe engineering teams.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/ADOBE_2026_JYOTIRMAY_BISWAS.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/ADOBE_2026_JYOTIRMAY_BISWAS.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 6. HackShastra Round 1 -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">HACKATHON</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">⚔️</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">HackShastra Hackathon (Round 1)</h3>
+              <p class="certificate-issuer">HackShastra Tech League</p>
+              <p class="certificate-date">2026 | Round 1 Qualifier</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Demonstrated algorithmic development, rapid prototyping, and software engineering competence in round 1 of the HackShastra competition.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/HackShastra%20round%201.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/HackShastra%20round%201.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 7. HackShastra Round 2 -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">HACKATHON</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">⚔️</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">HackShastra Hackathon (Round 2)</h3>
+              <p class="certificate-issuer">HackShastra Tech League</p>
+              <p class="certificate-date">2026 | Advanced Round</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Advanced to and completed Round 2 of HackShastra, engineering specialized software solutions under intense competitive time limits.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/HackShastra%20round%202.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/HackShastra%20round%202.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 8. Srijan The Tech Hackathon -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">TECH FEST HACKATHON</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🚀</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Srijan - The Tech Hackathon</h3>
+              <p class="certificate-issuer">Srijan Technical Committee</p>
+              <p class="certificate-date">2025-2026 | Regional Hackathon</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Participated in collegiate level technical hackathon building innovative software architectures and dynamic web platforms.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Srijan%20The%20Tech%20Hackathon.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Srijan%20The%20Tech%20Hackathon.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 9. Product Space Challenge 2026 -->
+      <div class="certificate-card" data-category="hackathon">
+        <div>
+          <span class="cert-category-tag tag-hackathon">PRODUCT & AI</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🎯</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Product Space Challenge 2026</h3>
+              <p class="certificate-issuer">Product Space</p>
+              <p class="certificate-date">2026 | Fellowship Challenge</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Product systems, engineering prioritization, AI integration workflow design, and user journey optimization challenge.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/PRODUCTSPACE-2026_Jyotirmay_Biswas.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/PRODUCTSPACE-2026_Jyotirmay_Biswas.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 10. Deloitte Cyber Security Virtual Internship -->
+      <div class="certificate-card" data-category="industry">
+        <div>
+          <span class="cert-category-tag tag-industry">DELOITTE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🛡️</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Deloitte Cyber Security Simulation</h3>
+              <p class="certificate-issuer">Deloitte / Forage</p>
+              <p class="certificate-date">2025-2026 | Virtual Internship</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Practical cybersecurity simulation focusing on threat vector analysis, zero-trust enterprise controls, network defense, and access policy compliance.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Deloitte%20Internship%20Certificate%20CyberSecurity.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Deloitte%20Internship%20Certificate%20CyberSecurity.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 11. Deloitte Technology Job Simulation -->
+      <div class="certificate-card" data-category="industry">
+        <div>
+          <span class="cert-category-tag tag-industry">DELOITTE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">💻</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Deloitte Technology Job Simulation</h3>
+              <p class="certificate-issuer">Deloitte / Forage</p>
+              <p class="certificate-date">2025-2026 | Virtual Internship</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Technology consulting simulation covering enterprise architecture planning, cloud migration models, and software client solution development.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Deloitte%20Internship%20Certificate%20Technology.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Deloitte%20Internship%20Certificate%20Technology.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 12. Tata Cybersecurity Analyst Job Simulation -->
+      <div class="certificate-card" data-category="industry">
+        <div>
+          <span class="cert-category-tag tag-industry">TATA GROUP</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">📊</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Tata Cybersecurity Analyst Simulation</h3>
+              <p class="certificate-issuer">Tata Group / Forage</p>
+              <p class="certificate-date">2025-2026 | Virtual Internship</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Simulated forensic investigations, endpoint security assessments, vulnerability remediation roadmaps, and executive threat briefing.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/TATA%20Cybersecurity%20Analyst%20Job%20Simulation.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/TATA%20Cybersecurity%20Analyst%20Job%20Simulation.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 13. EA Sports Certificate -->
+      <div class="certificate-card" data-category="industry">
+        <div>
+          <span class="cert-category-tag tag-industry">EA SPORTS</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🎮</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">EA Sports Technical Achievement</h3>
+              <p class="certificate-issuer">Electronic Arts (EA)</p>
+              <p class="certificate-date">2025-2026 | Achievement Record</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Recognized achievement in competitive technical gaming and digital event execution endorsed by Electronic Arts.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/EA-SPORTS%20CERTIFICATE.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/EA-SPORTS%20CERTIFICATE.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 14. ISRO Technical Certification 2026 -->
+      <div class="certificate-card" data-category="science">
+        <div>
+          <span class="cert-category-tag tag-science">ISRO</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🛰️</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">ISRO Technical Certification</h3>
+              <p class="certificate-issuer">Indian Space Research Organisation (ISRO)</p>
+              <p class="certificate-date">2026 | Space Computing Program</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Technical aerospace computing, satellite observation systems, and remote sensing spatial data analysis program conducted by ISRO.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/ISRO-2026.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/ISRO-2026.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 15. REFET 2026 National Conference -->
+      <div class="certificate-card" data-category="science">
+        <div>
+          <span class="cert-category-tag tag-science">RESEARCH CONFERENCE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🔬</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">REFET 2026 National Conference</h3>
+              <p class="certificate-issuer">SurTech Institute of Technology</p>
+              <p class="certificate-date">2026 | Research Paper & Symposium</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            National conference on Recent Emerging Frontiers in Engineering and Technology, exploring cutting-edge computing paradigms.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/REFET_2026_Jyotirmay_Biswas_Surtech.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/REFET_2026_Jyotirmay_Biswas_Surtech.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 16. 4th Regional Conclave of Students -->
+      <div class="certificate-card" data-category="science">
+        <div>
+          <span class="cert-category-tag tag-science">TECHNICAL CONCLAVE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🌐</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">4th Regional Conclave of Students</h3>
+              <p class="certificate-issuer">Regional Technical Forum</p>
+              <p class="certificate-date">2026 | Student Summit</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Student technical conclave discussing leadership, technology innovation, systems engineering, and collaborative research initiatives.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/4th%20Regional%20Conclave%20of%20Students_Jyotirmay_Biswas.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/4th%20Regional%20Conclave%20of%20Students_Jyotirmay_Biswas.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 17. NASA Participant Certificate (2018) -->
+      <div class="certificate-card" data-category="science">
+        <div>
+          <span class="cert-category-tag tag-science">NASA</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🌌</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">NASA Space Apps / Outreach Certificate</h3>
+              <p class="certificate-issuer">National Aeronautics & Space Admin (NASA)</p>
+              <p class="certificate-date">2018 | International Challenge</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            International space science and technology computing participant certificate recognizing early scientific engagement and technical curiosity.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/nasa%20ParticipantCertificate2018.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/nasa%20ParticipantCertificate2018.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 18. B.Tech Computer Science (3rd & 4th Semesters) -->
+      <div class="certificate-card" data-category="academic">
+        <div>
+          <span class="cert-category-tag tag-academic">ACADEMIC DEGREE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🎓</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">B.Tech CSE Grade Records</h3>
+              <p class="certificate-issuer">SurTech / MAKAUT (West Bengal)</p>
+              <p class="certificate-date">2025-2026 | 3rd & 4th Semesters</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Official university semester performance transcripts covering Computer Science and Engineering coursework, algorithms, and core systems.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Btech_3rd_and_4th.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Btech_3rd_and_4th.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 19. Diploma in Computer Science & Technology -->
+      <div class="certificate-card" data-category="academic">
+        <div>
+          <span class="cert-category-tag tag-academic">DIPLOMA DEGREE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">📜</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Diploma in CST (Final Result)</h3>
+              <p class="certificate-issuer">K.G. Engineering Institute / State Board</p>
+              <p class="certificate-date">2025 | Completed Diploma</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Official final completion diploma record in Computer Science & Technology with foundational systems, programming, and web engineering.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Diploma%20Final%20Result.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Diploma%20Final%20Result.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <!-- 20. Secondary Board Examination (Class 10) -->
+      <div class="certificate-card" data-category="academic">
+        <div>
+          <span class="cert-category-tag tag-academic">ACADEMIC FOUNDATION</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🏫</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Secondary Board Examination (Class 10)</h3>
+              <p class="certificate-issuer">State Board of Secondary Education</p>
+              <p class="certificate-date">Foundational Board Record</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Foundational secondary education completion certificate with strong academic performance in mathematics, science, and computing.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Class%2010.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Class%2010.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="certificates-actions" style="justify-content:center;">
+      <a href="index.html" class="btn-cyber btn-primary" style="padding: 14px 32px;">← Return to Main Portfolio</a>
+    </div>
+  </section>
+
+  <!-- Interactive CLI Terminal Section -->
+  <section class="section-container" id="terminal">
+    <div class="section-header">
+      <div class="hud-tag">COMMAND INTERFACE</div>
+      <h2 class="section-title">CYBER TERMINAL WIDGET</h2>
+    </div>
+
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div class="term-dot dot-red"></div>
+        <div class="term-dot dot-yellow"></div>
+        <div class="term-dot dot-green"></div>
+        <span class="term-title">jyotirmay@portfolio-hud:~ (bash)</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-line" style="color:var(--neon-cyan)">System loaded successfully. Welcome to Jyotirmay
+          Biswas's interactive CLI.</div>
+        <div class="terminal-line">Type <span style="color:var(--neon-green)">help</span> to see available commands. Try
+          typing <span style="color:var(--neon-green)">goal</span> or <span
+            style="color:var(--neon-green)">matrix</span>.</div>
+      </div>
+      <div style="padding:12px 20px; background:#070b14; border-top:1px solid rgba(0,240,255,0.15);">
+        <div class="terminal-input-wrapper">
+          <span class="terminal-prompt">jyotirmay@portfolio-hud:~$</span>
+          <input type="text" id="terminal-input" class="terminal-input"
+            placeholder="Type a command (e.g. goal, matrix, bio, skills, projects, help)..." autocomplete="on">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cyberpunk Floating Recruiter Quick Tools Bar -->
+  <div class="cyber-recruiter-bar">
+    <span class="recruiter-bar-label">⚡ RECRUITER TOOLS:</span>
+    <button onclick="copyMarkdownResume()" class="cyber-bar-btn">📋 Copy Resume Text</button>
+    <a href="my_resume.pdf" download class="cyber-bar-btn">📥 Download PDF</a>
+    <a href="mailto:jyotirmaybiswas.workspace@gmail.com" class="cyber-bar-btn cyber-bar-btn-primary">✉️ Email
+      Jyotirmay</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Jyotirmay Biswas | Aspiring AI Engineer & Data Scientist Portfolio | Built with Three.js & Modern Web
+      Standards</p>
+  </footer>
+
+</body>
+
+</html>

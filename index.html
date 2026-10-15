@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jyotirmay Biswas | Portfolio — Aspiring AI Engineer & Data Scientist</title>
+  <meta name="description"
+    content="3D Tech Career Portfolio & Interactive Resume HUD of Jyotirmay Biswas - Aspiring AI Engineer & Data Scientist specializing in RAG, vector search & LLMs.">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jyotirmaybiswas.github.io/">
+  <meta property="og:title" content="Jyotirmay Biswas | AI Engineer & Data Scientist Portfolio">
+  <meta property="og:description"
+    content="Aspiring AI Engineer & Data Scientist specializing in RAG, vector search (SBERT, FAISS), and LLMs. Featuring interactive 3D portfolio with project simulations.">
+  <meta property="og:image" content="profile Picture.png">
+  <meta property="og:site_name" content="Jyotirmay Biswas Portfolio">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://jyotirmaybiswas.github.io/">
+  <meta name="twitter:title" content="Jyotirmay Biswas | AI Engineer & Data Scientist Portfolio">
+  <meta name="twitter:description"
+    content="Aspiring AI Engineer & Data Scientist specializing in RAG, vector search (SBERT, FAISS), and LLMs. Interactive 3D cyberpunk portfolio.">
+  <meta name="twitter:image" content="profile Picture.png">
+  <meta name="twitter:creator" content="@jyotirmaybiswas">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#05070f">
+  <meta name="keywords"
+    content="AI Engineer, Data Scientist, Machine Learning, RAG, Vector Search, FAISS, SBERT, Python, Portfolio, Jyotirmay Biswas">
+  <meta name="author" content="Jyotirmay Biswas">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jyotirmaybiswas.github.io/">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="main.js"></script>
+</head>
+
+<body>
+
+  <!-- Cyberpunk Preloader Overlay -->
+  <div id="cyber-preloader">
+    <div class="scanline"></div>
+    <div class="preloader-frame">
+      <div class="preloader-header">
+        <div class="preloader-title">[ SYSTEM INITIALIZATION ]</div>
+        <div class="preloader-percent" id="preloader-percent">0%</div>
+      </div>
+      <div class="preloader-bar-track">
+        <div class="preloader-bar-fill" id="preloader-fill"></div>
+      </div>
+      <div class="preloader-logs" id="preloader-logs"></div>
+      <div class="enter-btn-wrapper">
+        <button id="enter-btn" class="btn-enter-cyber">⚡ ENTER SYSTEM</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Project & Roadmap Modal -->
+  <div id="sim-modal" class="sim-modal-overlay">
+    <div class="sim-modal-card">
+      <span class="sim-modal-close" onclick="closeSimModal()">✖ CLOSE</span>
+      <h3 id="sim-modal-title"
+        style="color:var(--neon-cyan); font-family:var(--font-hud); font-size:1.1rem; margin-bottom:16px;">LIVE
+        SIMULATION</h3>
+      <div class="sim-output-box" id="sim-modal-output"></div>
+      <div style="text-align:right;">
+        <button onclick="closeSimModal()" class="btn-cyber btn-primary" style="padding:6px 16px;">CLOSE WINDOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js WebGL Container & Matrix Rain -->
+  <div id="webgl-container"></div>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="cyber-grid"></div>
+
+  <!-- Toast Copy Notification -->
+  <div id="toast-notice" class="toast-notice"></div>
+
+  <!-- Floating Glass Navbar -->
+  <header class="navbar">
+    <a href="#" class="brand-logo">
+      [JB<span>.DEV</span>]
+    </a>
+
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+
+    <nav id="nav-menu" class="nav-menu">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#resume">Resume_HUD</a></li>
+        <li><a href="#terminal">Terminal</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="status-badge" onclick="openCareerGoalModal()" title="Click to view Career Goal & Learning Roadmap">
+          <div class="pulse-dot"></div>
+          Target: AI Engineer 🎯
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="about">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hud-tag">INITIALIZING PORTFOLIO // CAREER GOAL: AI ENGINEER & DATA SCIENTIST</div>
+        <h1 class="hero-title">JYOTIRMAY BISWAS</h1>
+        <div class="hero-subtitle">> Aspiring AI Engineer & Data Scientist</div>
+
+        <div class="hero-description">
+          Computer Science undergraduate actively building expertise in <strong>Artificial Intelligence, Data Science,
+            vector search (SBERT, FAISS), and Retrieval-Augmented Generation (RAG)</strong>. Focused on developing hands-on
+          experience with multi-stage ranking pipelines, statistical data processing, and secure backend systems across
+          Linux, Docker, Cursor, and Claude Code.
+        </div>
+
+        <div class="cta-group">
+          <a href="#projects" class="btn-cyber btn-primary">⚡ EXPLORE PROJECTS</a>
+          <a href="#resume" class="btn-cyber btn-secondary">📜 VIEW RESUME HUD</a>
+          <button onclick="openCareerGoalModal()" class="btn-cyber btn-secondary"
+            style="border-color:var(--neon-green); color:var(--neon-green);">🎯 CAREER GOAL & ROADMAP</button>
+        </div>
+      </div>
+
+      <div class="hero-avatar-wrapper">
+        <div class="cyber-avatar-card">
+          <div class="avatar-corner corner-tl"></div>
+          <div class="avatar-corner corner-tr"></div>
+          <div class="avatar-corner corner-bl"></div>
+          <div class="avatar-corner corner-br"></div>
+          <div class="avatar-image-container">
+            <img src="profile%20Picture.png" alt="Jyotirmay Biswas - AI Engineer & Data Scientist" class="hero-avatar-img">
+            <div class="avatar-scanline"></div>
+          </div>
+          <div class="avatar-status-badge">
+            <span class="pulse-dot"></span>
+            <span>STATUS: ONLINE // AI RESEARCH</span>
+          </div>
+          <div class="avatar-meta-bar">
+            <span>AI / ML</span> • <span>DATA SCIENCE</span> • <span>RAG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Skills Matrix -->
+  <section class="section-container" id="skills">
+    <div class="section-header">
+      <div class="hud-tag">CAPABILITIES MATRIX</div>
+      <h2 class="section-title">TECHNICAL SKILLS</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🧠</div>
+        <h3 class="skill-category-title">AI / ML & Vector Search</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">SentenceTransformers (SBERT)</span>
+          <span class="skill-tag">FAISS Vector Indexing</span>
+          <span class="skill-tag">Groq LLM API (Llama 3.1)</span>
+          <span class="skill-tag">RAG Architectures</span>
+          <span class="skill-tag">TF-IDF Retrieval</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h3 class="skill-category-title">Data Science & Analytics</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Pandas & NumPy</span>
+          <span class="skill-tag">Data Cleaning & Quality</span>
+          <span class="skill-tag">Statistical Pre-filtering</span>
+          <span class="skill-tag">Feature Processing</span>
+          <span class="skill-tag">Model Evaluation</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h3 class="skill-category-title">Programming & Systems</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python (Core, Async, Data)</span>
+          <span class="skill-tag">Flask & REST APIs</span>
+          <!-- <span class="skill-tag">JavaScript</span> -->
+          <span class="skill-tag">Socket.IO / WebSockets</span>
+          <span class="skill-tag">Tor Onion Routing</span>
+          <span class="skill-tag">AES-256 Encryption</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <h3 class="skill-category-title">Tools & OS Environment</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <!-- <span class="skill-tag">Cursor</span> -->
+          <span class="skill-tag">Claude Code</span>
+          <!-- <span class="skill-tag">MySQL</span> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section class="section-container" id="projects">
+    <div class="section-header">
+      <div class="hud-tag">FEATURED ARCHITECTURE</div>
+      <h2 class="section-title">REAL-WORLD PROJECTS</h2>
+    </div>
+
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-type">Hackathon / AI-ML Project</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3 class="project-title">AI Candidate Ranking System</h3>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            Two-Stage Retrieval-Augmented Ranking (RAR) pipeline engineered in Python to rank 100,000 job candidates
+            using vector embeddings & LLM scoring.
+          </p>
+
+          <!-- Architecture Visualizer -->
+          <div class="arch-box">
+            <div>// PIPELINE ARCHITECTURE:</div>
+            <div class="arch-flow">
+              <span class="arch-step">100k Input</span> →
+              <span class="arch-step">Behavioral Pre-filter (-28%)</span> →
+              <span class="arch-step">TF-IDF + SBERT Embeddings</span> →
+              <span class="arch-step">FAISS Vector Index</span> →
+              <span class="arch-step">Groq Llama-3.1 Scoring</span>
+            </div>
+          </div>
+
+          <ul class="project-highlights">
+            <li>Designed a 2-stage RAR pipeline applying behavioral pre-filtering to cut 28% of unqualified candidates
+              before AI compute.</li>
+            <li>Built hybrid semantic search combining TF-IDF and SBERT embeddings with FAISS vector indexing to narrow
+              71,000 candidates to a top-100 shortlist.</li>
+            <li>Integrated Groq LLM API (Llama-3.1-8b-instant) to score candidates across 4 dimensions with explainable
+              reasoning & CSV checkpointing.</li>
+          </ul>
+
+          <div style="margin-bottom:16px;">
+            <button onclick="runRarSimulation()" class="btn-cyber btn-secondary"
+              style="width:100%; justify-content:center; border-color:var(--neon-green); color:var(--neon-green);">🧪
+              RUN LIVE RAR SIMULATION</button>
+          </div>
+
+          <div class="tech-stack-pills">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Pandas</span>
+            <span class="tech-pill">SBERT</span>
+            <span class="tech-pill">FAISS</span>
+            <span class="tech-pill">Groq LLM API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-meta">
+            <span class="project-type">Personal Project</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3 class="project-title">Ghost Protocol Chat</h3>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            Hybrid zero-trust secure messaging application combining Tor onion routing with clear-web accessibility and
+            client-side encryption.
+          </p>
+
+          <!-- Architecture Visualizer -->
+          <div class="arch-box">
+            <div>// SECURITY ARCHITECTURE:</div>
+            <div class="arch-flow">
+              <span class="arch-step">Client AES-256</span> →
+              <span class="arch-step">Ciphertext Payload</span> →
+              <span class="arch-step">Flask + Socket.IO</span> →
+              <span class="arch-step">Tor Hidden Service</span> →
+              <span class="arch-step">RAM-only Storage</span>
+            </div>
+          </div>
+
+          <ul class="project-highlights">
+            <li>Built a secure messaging app using Python/Flask backend and static HTML/JS frontend deployed on Netlify.
+            </li>
+            <li>Implemented client-side AES-256 encryption ensuring server only relays ciphertext for zero-trust
+              privacy.</li>
+            <li>Enabled real-time ephemeral communication via WebSockets (Socket.IO) with no database — RAM-only message
+              life cycle wiped upon session end.</li>
+          </ul>
+
+          <div style="margin-bottom:16px;">
+            <button onclick="runGhostSimulation()" class="btn-cyber btn-secondary"
+              style="width:100%; justify-content:center; border-color:var(--neon-cyan); color:var(--neon-cyan);">🔒 RUN
+              AES-256 TOR SIMULATION</button>
+          </div>
+
+          <div class="tech-stack-pills">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Flask</span>
+            <span class="tech-pill">Socket.IO</span>
+            <span class="tech-pill">Tor Routing</span>
+            <span class="tech-pill">Ngrok</span>
+            <span class="tech-pill">AES-256</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Resume HUD Section -->
+  <section class="section-container" id="resume">
+    <div class="section-header">
+      <div class="hud-tag">DOCUMENT HUD</div>
+      <h2 class="section-title">INTERACTIVE RESUME</h2>
+    </div>
+
+    <div class="resume-hud">
+      <div class="resume-header">
+        <div style="display:flex; align-items:center; gap:16px;">
+          <img src="profile%20Picture.png" alt="Jyotirmay Biswas" class="resume-avatar-thumb">
+          <div>
+            <h3 style="color:#fff; font-family:var(--font-hud); font-size:1.4rem;">JYOTIRMAY BISWAS</h3>
+            <p style="color:var(--neon-cyan); font-family:var(--font-hud); font-size:0.9rem; margin-top:2px;">CAREER GOAL:
+              ASPIRING AI ENGINEER & DATA SCIENTIST</p>
+            <p style="color:var(--text-secondary); font-family:var(--font-code); font-size:0.85rem; margin-top:4px;">
+              Kolkata, India | jyotirmaybiswas.workspace@gmail.com | +91 8017760704</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="mailto:jyotirmaybiswas.workspace@gmail.com" class="btn-cyber btn-primary"
+            style="padding:8px 16px;">✉️ CONTACT EMAIL</a>
+          <a href="my_resume.pdf" download class="btn-cyber btn-secondary" style="padding:8px 16px;">📥 DOWNLOAD RESUME
+            PDF</a>
+          <button class="btn-cyber btn-secondary"
+            style="padding:8px 16px; border-color:var(--neon-violet); color:var(--neon-violet);"
+            onclick="togglePdfViewer()">👁️ PREVIEW PDF</button>
+        </div>
+      </div>
+
+      <!-- PDF Viewer Container -->
+      <div id="pdf-viewer-container" class="pdf-viewer-container" style="display:none;">
+        <div class="pdf-viewer-header">
+          <h4 style="color:var(--neon-cyan); font-family:var(--font-hud); margin:0;">RESUME PREVIEW</h4>
+          <button class="btn-cyber btn-secondary" style="padding:6px 12px; font-size:0.75rem;"
+            onclick="togglePdfViewer()">✖ CLOSE PREVIEW</button>
+        </div>
+        <div class="pdf-viewer-wrapper">
+          <canvas id="pdf-canvas"></canvas>
+          <div id="pdf-loading" class="pdf-loading">Loading PDF...</div>
+          <div id="pdf-error" class="pdf-error" style="display:none;"></div>
+        </div>
+        <div class="pdf-controls"
+          style="display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap;">
+          <button id="pdf-prev" class="btn-cyber btn-secondary" style="padding:6px 12px;" disabled>⬅ PREV</button>
+          <span id="pdf-page-info"
+            style="color:var(--text-secondary); font-family:var(--font-code); display:flex; align-items:center;">Page
+            <span id="pdf-current-page">1</span> of <span id="pdf-total-pages">-</span></span>
+          <button id="pdf-next" class="btn-cyber btn-secondary" style="padding:6px 12px;">NEXT ➡</button>
+          <button id="pdf-zoom-in" class="btn-cyber btn-secondary" style="padding:6px 12px;">🔍+</button>
+          <button id="pdf-zoom-out" class="btn-cyber btn-secondary" style="padding:6px 12px;">🔍-</button>
+          <a href="my_resume.pdf" download class="btn-cyber btn-primary" style="padding:6px 12px;">📥 DOWNLOAD</a>
+        </div>
+      </div>
+
+      <div class="resume-tabs">
+        <button class="tab-btn active" data-tab="tab-objective">Objective</button>
+        <button class="tab-btn" data-tab="tab-education">Education</button>
+        <button class="tab-btn" data-tab="tab-projects">Key Projects</button>
+        <button class="tab-btn" data-tab="tab-skills">Skills & Tools</button>
+      </div>
+
+      <!-- Objective Tab -->
+      <div class="tab-content active" id="tab-objective">
+        <h4 style="color:var(--neon-cyan); font-family:var(--font-hud); margin-bottom:12px;">CAREER OBJECTIVE</h4>
+        <p style="color:var(--text-secondary); font-size:1rem; line-height:1.7;">
+          Computer Science undergraduate actively building toward a career as an <strong>AI Engineer or Data
+            Scientist</strong>. Possesses strong Python fundamentals and hands-on experience building real-world
+          projects — including a 2-stage candidate ranking system using vector search (SBERT, FAISS) and LLM explainable
+          scoring. Eager to join an engineering or data science team to learn, contribute, and build intelligent data
+          systems across Linux, Docker, Cursor, and Claude Code.
+        </p>
+      </div>
+
+      <!-- Education Tab -->
+      <div class="tab-content" id="tab-education">
+        <div class="education-item">
+          <h4 style="color:#fff; font-family:var(--font-hud);">BTECH in Computer Science and Engineering</h4>
+          <p style="color:var(--neon-cyan); font-family:var(--font-code); font-size:0.85rem;">Dr. Sudhir Chandra Sur
+            Institute of Technology and Sports Complex | Expected Graduation: 2028 | Kolkata, India</p>
+          <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:8px;">
+            <strong>Relevant Coursework:</strong> Object-Oriented Programming, Systems, Operating Systems, Computer
+            Networks
+          </p>
+        </div>
+
+        <div class="education-item" style="border:none;">
+          <h4 style="color:#fff; font-family:var(--font-hud);">Diploma in Computer Science and Technology</h4>
+          <p style="color:var(--neon-cyan); font-family:var(--font-code); font-size:0.85rem;">State Board | K. G.
+            Engineering Institute | Year of Passing: 2025</p>
+        </div>
+      </div>
+
+      <!-- Projects Tab -->
+      <div class="tab-content" id="tab-projects">
+        <div class="exp-item">
+          <h4 style="color:var(--neon-cyan); font-family:var(--font-hud);">AI Candidate Ranking System
+            (India-runs-AI-ML-Project)</h4>
+          <p style="color:var(--text-muted); font-family:var(--font-code); font-size:0.8rem;">2026 | Hackathon Project /
+            AI-ML Project</p>
+          <ul style="color:var(--text-secondary); margin-top:8px; padding-left:20px; font-size:0.9rem;">
+            <li>Designed a two-stage Retrieval-Augmented Ranking (RAR) pipeline in Python to rank 100,000 job
+              candidates, applying behavioral pre-filtering to remove 28% of unqualified candidates before AI compute.
+            </li>
+            <li>Built a hybrid semantic search combining TF-IDF and SBERT embeddings with FAISS vector indexing,
+              narrowing 71,000 candidates down to a top-100 shortlist.</li>
+            <li>Integrated the Groq LLM API (Llama-3.1-8b-instant) to score shortlisted candidates on four dimensions
+              with explainable reasoning.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item" style="border:none;">
+          <h4 style="color:var(--neon-cyan); font-family:var(--font-hud);">Ghost Protocol Chat (Onion-Chat-Project)</h4>
+          <p style="color:var(--text-muted); font-family:var(--font-code); font-size:0.8rem;">2025 | Personal Project
+          </p>
+          <ul style="color:var(--text-secondary); margin-top:8px; padding-left:20px; font-size:0.9rem;">
+            <li>Built a hybrid secure messaging application combining Tor onion routing with clear-web accessibility,
+              using Python/Flask backend and static HTML/JS frontend deployed on Netlify.</li>
+            <li>Implemented client-side AES-256 encryption ensuring server only relays ciphertext.</li>
+            <li>Enabled real-time, ephemeral communication via WebSockets (Socket.IO) with no database (RAM only).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Skills Tab -->
+      <div class="tab-content" id="tab-skills">
+        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.8;">
+          <strong>AI/ML & Vector Search:</strong> SentenceTransformers (SBERT), FAISS Vector Search, Groq LLM API, RAG
+          Pipelines, TF-IDF<br>
+          <strong>Data Science & Analytics:</strong> Pandas, NumPy, Data Cleaning, Statistical Pre-filtering, Feature
+          Processing<br>
+          <strong>Programming & Web:</strong> Python, JavaScript, HTML5, CSS3, Flask, Socket.IO, REST APIs<br>
+          <strong>Environment & Tools:</strong> Linux, Docker, Git, VS Code, Cursor, Claude Code, MySQL<br>
+          <strong>Core CS Concepts:</strong> Object-Oriented Programming, Computer Networks, Operating Systems
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Section -->
+  <section class="section-container" id="certificates">
+    <div class="section-header">
+      <div class="hud-tag">CERTIFICATIONS</div>
+      <h2 class="section-title">PROFESSIONAL CERTIFICATIONS</h2>
+    </div>
+
+    <div class="certificates-grid">
+      <div class="certificate-card">
+        <div>
+          <span class="cert-category-tag tag-ds">AI & DATA SCIENCE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🏆</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Kharagpur Data Science Hackathon (KDSH 2026)</h3>
+              <p class="certificate-issuer">IIT Kharagpur (KDSS)</p>
+              <p class="certificate-date">2026 | National Hackathon</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Competed in premier data science challenges organized by Kharagpur Data Science Society, analyzing multi-dimensional datasets with advanced predictive modeling.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/KDSH_2026_Jyotirmay_Biswas.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/KDSH_2026_Jyotirmay_Biswas.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div>
+          <span class="cert-category-tag tag-ds">DATA SCIENCE COURSE</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🧠</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">The Ultimate Job Ready Data Science Course</h3>
+              <p class="certificate-issuer">Comprehensive Industry Certification</p>
+              <p class="certificate-date">2026 | Professional Specialization</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Extensive professional training in Python, Pandas, statistical modeling, Exploratory Data Analysis (EDA), feature engineering, and real-world ML deployment.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/The_Ultimate_Job_Ready_Data_Science_Course_Certificate.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/The_Ultimate_Job_Ready_Data_Science_Course_Certificate.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div>
+          <span class="cert-category-tag tag-science">SPACE COMPUTING</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🚀</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">ISRO Technical Certification</h3>
+              <p class="certificate-issuer">Indian Space Research Organisation (ISRO)</p>
+              <p class="certificate-date">2026 | Research Program</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Recognized technical program covering aerospace computational systems, remote sensing data processing, and scientific technology applications.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/ISRO-2026.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/ISRO-2026.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div>
+          <span class="cert-category-tag tag-hackathon">NATIONAL HACKATHON</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">💡</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Smart India Hackathon (SIH 2026)</h3>
+              <p class="certificate-issuer">Ministry of Education's Innovation Cell</p>
+              <p class="certificate-date">2026 | Internal Hackathon</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Selected in premier internal hackathon evaluating national real-world problem statements, software innovation, and scalable architecture design.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/SIH%202026%20INTERNAL%20HACKATHON.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/SIH%202026%20INTERNAL%20HACKATHON.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div>
+          <span class="cert-category-tag tag-industry">CYBERSECURITY</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">🛡️</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Deloitte Cyber Security Simulation</h3>
+              <p class="certificate-issuer">Deloitte / Forage</p>
+              <p class="certificate-date">2025-2026 | Virtual Internship</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Industry simulation analyzing enterprise security postures, threat vectors, network access governance, and zero-trust defensive configurations.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/Deloitte%20Internship%20Certificate%20CyberSecurity.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/Deloitte%20Internship%20Certificate%20CyberSecurity.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div>
+          <span class="cert-category-tag tag-industry">INDUSTRY SIMULATION</span>
+          <div class="certificate-header">
+            <div class="certificate-icon">📊</div>
+            <div class="certificate-title-wrap">
+              <h3 class="certificate-title">Tata Cybersecurity Analyst Simulation</h3>
+              <p class="certificate-issuer">Tata Group / Forage</p>
+              <p class="certificate-date">2025-2026 | Virtual Internship</p>
+            </div>
+          </div>
+          <div class="certificate-description">
+            Practical forensic analysis, threat assessment methodologies, vulnerability mitigation planning, and enterprise security compliance auditing.
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="certificates/TATA%20Cybersecurity%20Analyst%20Job%20Simulation.pdf" target="_blank" class="btn-cert-view">👁️ View PDF</a>
+          <a href="certificates/TATA%20Cybersecurity%20Analyst%20Job%20Simulation.pdf" download class="btn-cert-download">📥 Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="certificates-actions">
+      <a href="certificates.html" class="btn-cyber btn-primary" style="width: 100%; padding: 14px 28px; margin-top: 24px; justify-content:center;">📜 View All 20 Verified Certifications & Academic Records →</a>
+    </div>
+  </section>
+
+  <!-- Interactive CLI Terminal Section -->
+  <section class="section-container" id="terminal">
+    <div class="section-header">
+      <div class="hud-tag">COMMAND INTERFACE</div>
+      <h2 class="section-title">CYBER TERMINAL WIDGET</h2>
+    </div>
+
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div class="term-dot dot-red"></div>
+        <div class="term-dot dot-yellow"></div>
+        <div class="term-dot dot-green"></div>
+        <span class="term-title">jyotirmay@portfolio-hud:~ (bash)</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-line" style="color:var(--neon-cyan)">System loaded successfully. Welcome to Jyotirmay
+          Biswas's interactive CLI.</div>
+        <div class="terminal-line">Type <span style="color:var(--neon-green)">help</span> to see available commands. Try
+          typing <span style="color:var(--neon-green)">goal</span> or <span
+            style="color:var(--neon-green)">matrix</span>.</div>
+      </div>
+      <div style="padding:12px 20px; background:#070b14; border-top:1px solid rgba(0,240,255,0.15);">
+        <div class="terminal-input-wrapper">
+          <span class="terminal-prompt">jyotirmay@portfolio-hud:~$</span>
+          <input type="text" id="terminal-input" class="terminal-input"
+            placeholder="Type a command (e.g. goal, matrix, bio, skills, projects, help)..." autocomplete="on">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section-container" id="contact">
+    <div class="section-header">
+      <div class="hud-tag">ESTABLISH CONNECTION</div>
+      <h2 class="section-title">GET IN TOUCH</h2>
+    </div>
+
+    <div
+      style="background:var(--bg-card); border:1px solid var(--border-cyan); border-radius:16px; padding:36px; backdrop-filter:blur(16px);">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:32px;">
+        <div>
+          <h3 style="color:#fff; font-family:var(--font-hud); margin-bottom:12px;">Contact Information</h3>
+          <p style="color:var(--text-secondary); margin-bottom:20px;">Feel free to reach out regarding AI Engineer or
+            Data Scientist entry-level/internship roles, or collaboration on AI/ML projects.</p>
+
+          <p style="color:var(--text-primary); font-family:var(--font-code); margin-bottom:8px;">📍 Location: Kolkata,
+            India</p>
+          <p style="color:var(--text-primary); font-family:var(--font-code); margin-bottom:8px;">✉️ Email:
+            jyotirmaybiswas.workspace@gmail.com</p>
+          <p style="color:var(--text-primary); font-family:var(--font-code); margin-bottom:20px;">📞 Phone: +91
+            8017760704</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cyberpunk Floating Recruiter Quick Tools Bar -->
+  <div class="cyber-recruiter-bar">
+    <span class="recruiter-bar-label">⚡ RECRUITER TOOLS:</span>
+    <button onclick="copyMarkdownResume()" class="cyber-bar-btn">📋 Copy Resume Text</button>
+    <a href="my_resume.pdf" download class="cyber-bar-btn">Download PDF</a>
+    <a href="mailto:jyotirmaybiswas.workspace@gmail.com" class="cyber-bar-btn cyber-bar-btn-primary">Email Jyotirmay</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Jyotirmay Biswas | Aspiring AI Engineer & Data Scientist Portfolio | Built with Three.js & Modern Web
+      Standards</p>
+  </footer>
+
+</body>
+
+</html>
