@@ -700,16 +700,19 @@ body {
 .hud-tag {
   font-family: var(--font-code);
   color: var(--neon-cyan);
-  font-size: 0.9rem;
+  font-size: clamp(0.72rem, 1.05vw, 0.85rem);
   margin-bottom: 12px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
 }
 
 .hud-tag::before {
   content: '//';
   color: var(--neon-pink);
+  flex-shrink: 0;
 }
 
 .hero-title {
@@ -1318,6 +1321,7 @@ footer {
     text-align: center;
   }
 
+  .hud-tag { font-size: clamp(0.62rem, 2.5vw, 0.76rem); white-space: nowrap; justify-content: center; }
   .hero-title { font-size: 1.9rem; line-height: 1.1; }
   .hero-subtitle { font-size: 1rem; }
   .hero-description { font-size: 0.9rem; padding: 14px; }
