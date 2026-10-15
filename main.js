@@ -440,7 +440,7 @@ function initTerminal() {
   - <span style="color: var(--neon-cyan)">history</span>: Show command history`,
 
     bio: `<span style="color: var(--neon-cyan)">[JYOTIRMAY BISWAS]</span>
-Computer Science undergraduate actively building expertise in AI/ML systems, Data Science, RAG architectures, and vector search (FAISS, SBERT). Verified achievements from ISRO, IIT Kharagpur (KDSH 2026), Smart India Hackathon (SIH), Deloitte, and Tata. Comfortable across Linux, Docker, Cursor, and Claude Code.`,
+Computer Science undergraduate passionate about Artificial Intelligence, Data Science, and building intelligent software with Python. Enthusiastic about machine learning models, smart data pipelines, and real-world problem solving. Always eager to learn, build, and collaborate!`,
 
     certs: `<span style="color: var(--neon-cyan)">[VERIFIED CERTIFICATIONS ARCHIVE - 20 RECORDS]</span>
 - <span style="color: var(--neon-green)">AI & Data Science:</span> Kharagpur Data Science Hackathon (IIT Kharagpur), Ultimate Data Science Course
