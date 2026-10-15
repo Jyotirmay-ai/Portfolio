@@ -1,6 +1,6 @@
 # Portfolio
 
-HUD Portfolio & Interactive Resume of **Jyotirmay Biswas** (Aspiring AI Engineer & Data Scientist).
+My Portfolio & Interactive Resume (Aspiring AI Engineer & Data Scientist).
 
 ---
 
