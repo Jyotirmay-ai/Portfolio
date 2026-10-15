@@ -445,7 +445,7 @@ Computer Science undergraduate actively building expertise in AI/ML systems, Dat
     certs: `<span style="color: var(--neon-cyan)">[VERIFIED CERTIFICATIONS ARCHIVE - 20 RECORDS]</span>
 - <span style="color: var(--neon-green)">AI & Data Science:</span> Kharagpur Data Science Hackathon (IIT Kharagpur), Ultimate Data Science Course
 - <span style="color: var(--neon-pink)">Space & Science:</span> ISRO Technical Program 2026, REFET 2026, NASA Space Apps
-- <span style="color: var(--neon-cyan)">Hackathons:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space
+- <span style="color: var(--neon-cyan)">Hackathons & Tech:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space, 4th Regional Conclave
 - <span style="color: #c084fc">Industry Simulations:</span> Deloitte Cyber Security, Deloitte Technology, Tata Cybersecurity Analyst, EA Sports
 - <span style="color: #ffbd2e">Academics:</span> B.Tech CSE (3rd/4th Sems), Diploma in CST, Secondary Board Record
 👉 Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
@@ -453,7 +453,7 @@ Computer Science undergraduate actively building expertise in AI/ML systems, Dat
     certificates: `<span style="color: var(--neon-cyan)">[VERIFIED CERTIFICATIONS ARCHIVE - 20 RECORDS]</span>
 - <span style="color: var(--neon-green)">AI & Data Science:</span> Kharagpur Data Science Hackathon (IIT Kharagpur), Ultimate Data Science Course
 - <span style="color: var(--neon-pink)">Space & Science:</span> ISRO Technical Program 2026, REFET 2026, NASA Space Apps
-- <span style="color: var(--neon-cyan)">Hackathons:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space
+- <span style="color: var(--neon-cyan)">Hackathons & Tech:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space, 4th Regional Conclave
 - <span style="color: #c084fc">Industry Simulations:</span> Deloitte Cyber Security, Deloitte Technology, Tata Cybersecurity Analyst, EA Sports
 - <span style="color: #ffbd2e">Academics:</span> B.Tech CSE (3rd/4th Sems), Diploma in CST, Secondary Board Record
 👉 Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
