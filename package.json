@@ -1,0 +1,28 @@
+{
+  "name": "jyotirmay-portfolio",
+  "version": "1.0.0",
+  "description": "HUD Portfolio & Interactive Resume of Jyotirmay Biswas",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "build": "",
+    "start": "npx serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jyotirmay-ai/Portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "ai-engineer",
+    "data-scientist",
+    "threejs",
+    "cyberpunk"
+  ],
+  "author": "Jyotirmay Biswas",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
+
