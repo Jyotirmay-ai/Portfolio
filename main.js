@@ -53,13 +53,12 @@ function initPreloader() {
   if (!preloader || !barFill || !percentText) return;
 
   const bootLogs = [
-    "> INITIALIZING CYBER HUD KERNEL v2.6...",
-    "> LOADING THREE.JS 3D PARTICLE ENGINE...",
-    "> MOUNTING AI CANDIDATE RANKING SYSTEM DATA (100,000 RECORDS)...",
-    "> INITIALIZING SBERT EMBEDDINGS & FAISS VECTOR SEARCH...",
-    "> DECRYPTING GHOST PROTOCOL TOR CHAT MODULE...",
-    "> LOADING CAREER GOAL: AI ENGINEER & DATA SCIENTIST...",
-    "> SYSTEM READY // ACCESS GRANTED."
+    "> loading assets...",
+    "> initializing 3d engine...",
+    "> rendering particles...",
+    "> mounting components...",
+    "> applying theme...",
+    "> ready."
   ];
 
   let progress = 0;
@@ -221,7 +220,7 @@ function initSimulators() {
     const output = document.getElementById('sim-modal-output');
     if (!modal || !output) return;
 
-    title.innerText = "🧪 LIVE SIMULATION: AI CANDIDATE RANKING SYSTEM (2-STAGE RAR)";
+    title.innerText = "LIVE SIMULATION: AI CANDIDATE RANKING SYSTEM (2-STAGE RAR)";
     output.innerHTML = "<div>[STARTING RAR PIPELINE SIMULATION...]</div>";
     modal.classList.add('active');
 
@@ -236,7 +235,7 @@ function initSimulators() {
       "> Evaluating across 4 dimensions: Tech Fit, Problem Solving, Code Quality, Culture.",
       "> Output Checkpoint saved to candidate_ranks_final.csv.",
       "--------------------------------------------------",
-      "🏆 TOP MATCH: Candidate #49102 | Score: 98.4/100 | Recommendation: EVALUATION PASSED"
+      "TOP MATCH: Candidate #49102 | Score: 98.4/100 | Recommendation: EVALUATION PASSED"
     ];
 
     let idx = 0;
@@ -260,7 +259,7 @@ function initSimulators() {
     const output = document.getElementById('sim-modal-output');
     if (!modal || !output) return;
 
-    title.innerText = "🔒 LIVE SIMULATION: GHOST PROTOCOL AES-256 TOR ROUTING";
+    title.innerText = "LIVE SIMULATION: GHOST PROTOCOL AES-256 TOR ROUTING";
     output.innerHTML = "<div>[INITIALIZING ZERO-TRUST EPHEMERAL MESH...]</div>";
     modal.classList.add('active');
 
@@ -296,18 +295,18 @@ function initSimulators() {
     const output = document.getElementById('sim-modal-output');
     if (!modal || !output) return;
 
-    title.innerText = "🎯 CAREER VISION: TARGETING AI ENGINEER & DATA SCIENTIST ROLES";
+    title.innerText = "CAREER VISION: TARGETING AI ENGINEER & DATA SCIENTIST ROLES";
     output.innerHTML = `
       <div style="color:var(--neon-cyan); font-weight:700;">JYOTIRMAY BISWAS — CAREER GOAL & SKILL ROADMAP</div>
       <div style="margin:10px 0; color:#fff; line-height:1.7;">
-        <strong>🚀 Ultimate Objective:</strong> To work as an AI Engineer or Data Scientist, contributing to real-world machine learning models, vector search indexers, and data intelligence pipelines.<br><br>
-        <strong>📚 Active Learning & Hands-on Foundation:</strong><br>
+        <strong>Ultimate Objective:</strong> To work as an AI Engineer or Data Scientist, contributing to real-world machine learning models, vector search indexers, and data intelligence pipelines.<br><br>
+        <strong>Active Learning & Hands-on Foundation:</strong><br>
         • <strong>AI/ML & Vector Search:</strong> SentenceTransformers (SBERT), FAISS Vector Indexing, Retrieval-Augmented Generation (RAG), Groq LLM API.<br>
         • <strong>Data Science:</strong> Data cleaning, statistical filtering, Pandas, NumPy, and feature processing.<br>
         • <strong>Systems & Tools:</strong> Python core & async programming, Linux, Docker, Git, Cursor, and Claude Code.<br><br>
-        <strong>💡 Philosophy:</strong> Highly motivated Computer Science undergraduate eager to learn, adapt, and grow within a fast-paced AI or data team.
+        <strong>Philosophy:</strong> Highly motivated Computer Science undergraduate eager to learn, adapt, and grow within a fast-paced AI or data team.
       </div>
-      <div style="color:var(--neon-green); margin-top:8px;">[STATUS]: OPEN TO ENTRY-LEVEL & INTERNSHIP ROLES 🚀</div>
+      <div style="color:var(--neon-green); margin-top:8px;">[STATUS]: OPEN TO ENTRY-LEVEL & INTERNSHIP ROLES</div>
     `;
     modal.classList.add('active');
   };
@@ -402,7 +401,7 @@ Computer Science undergraduate actively building toward a career as an AI Engine
 - Diploma in Computer Science & Technology | K. G. Engineering Institute (2025)`;
 
   navigator.clipboard.writeText(markdownText).then(() => {
-    showToast('✓ Markdown Resume copied to clipboard!');
+    showToast('SUCCESS: Markdown Resume copied to clipboard!');
   });
 }
 
@@ -448,7 +447,7 @@ Computer Science undergraduate passionate about Artificial Intelligence, Data Sc
 - <span style="color: var(--neon-cyan)">Hackathons & Tech:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space, 4th Regional Conclave
 - <span style="color: #c084fc">Industry Simulations:</span> Deloitte Cyber Security, Deloitte Technology, Tata Cybersecurity Analyst, EA Sports
 - <span style="color: #ffbd2e">Academics:</span> B.Tech CSE (3rd/4th Sems), Diploma in CST, Secondary Board Record
-👉 Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
+Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
 
     certificates: `<span style="color: var(--neon-cyan)">[VERIFIED CERTIFICATIONS ARCHIVE - 20 RECORDS]</span>
 - <span style="color: var(--neon-green)">AI & Data Science:</span> Kharagpur Data Science Hackathon (IIT Kharagpur), Ultimate Data Science Course
@@ -456,7 +455,7 @@ Computer Science undergraduate passionate about Artificial Intelligence, Data Sc
 - <span style="color: var(--neon-cyan)">Hackathons & Tech:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space, 4th Regional Conclave
 - <span style="color: #c084fc">Industry Simulations:</span> Deloitte Cyber Security, Deloitte Technology, Tata Cybersecurity Analyst, EA Sports
 - <span style="color: #ffbd2e">Academics:</span> B.Tech CSE (3rd/4th Sems), Diploma in CST, Secondary Board Record
-👉 Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
+Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
 
     skills: `<span style="color: var(--neon-cyan)">[TECHNICAL SKILLS MATRIX]</span>
 - AI/ML & NLP: SentenceTransformers (SBERT), FAISS Vector Index, Groq LLM API (Llama-3.1), RAG Architectures
