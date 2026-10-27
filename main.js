@@ -36,9 +36,9 @@ function initHamburgerMenu() {
   });
 }
 
-// 3D Three.js Engine Variables
-let scene, camera, renderer, particlesMesh, cyberCore, innerIco;
-let mouseX = 0, mouseY = 0;
+// 3D Three.js Engine Variables — AI Neural Network & Vector Constellation
+let scene, camera, renderer, neuralPoints, neuralLines, ambientDustMesh;
+let targetCamX = 0, targetCamY = 0;
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
 
@@ -98,78 +98,127 @@ function init3D() {
   if (!container) return;
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x05070f, 0.0012);
+  scene.fog = new THREE.FogExp2(0x030611, 0.001);
 
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
-  camera.position.z = 750;
+  camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 2000);
+  camera.position.z = 720;
 
-  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
-  // 1. Particle Cloud
-  const particlesCount = 900;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particlesCount * 3);
-  const colors = new Float32Array(particlesCount * 3);
-
-  const colorCyan = new THREE.Color(0x00f0ff);
-  const colorViolet = new THREE.Color(0x8a2be2);
-  const colorPink = new THREE.Color(0xff007f);
-
-  for (let i = 0; i < particlesCount * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 2200;
-    positions[i + 1] = (Math.random() - 0.5) * 2200;
-    positions[i + 2] = (Math.random() - 0.5) * 2200;
-
-    const rand = Math.random();
-    let c = colorCyan;
-    if (rand > 0.6) c = colorViolet;
-    else if (rand > 0.85) c = colorPink;
-
-    colors[i] = c.r;
-    colors[i + 1] = c.g;
-    colors[i + 2] = c.b;
+  // Helper: Generates a soft circular glow point texture
+  function createPointTexture() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    grad.addColorStop(0.2, 'rgba(0, 240, 255, 0.9)');
+    grad.addColorStop(0.5, 'rgba(0, 240, 255, 0.25)');
+    grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(canvas);
   }
 
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  // 1. AI Vector Embedding Nodes (Neural Graph Points)
+  const NODE_COUNT = 135;
+  const MAX_DISTANCE = 150;
+  const MAX_DISTANCE_SQ = MAX_DISTANCE * MAX_DISTANCE;
+  const MAX_LINES = 380;
 
-  const material = new THREE.PointsMaterial({
-    size: 4.5,
+  const nodePositions = new Float32Array(NODE_COUNT * 3);
+  const nodeColors = new Float32Array(NODE_COUNT * 3);
+  const nodeVelocities = [];
+
+  const cyan = new THREE.Color(0x00f0ff);
+  const violet = new THREE.Color(0x8a2be2);
+  const emerald = new THREE.Color(0x00ff88);
+
+  for (let i = 0; i < NODE_COUNT; i++) {
+    const i3 = i * 3;
+    nodePositions[i3] = (Math.random() - 0.5) * 1400;
+    nodePositions[i3 + 1] = (Math.random() - 0.5) * 950;
+    nodePositions[i3 + 2] = (Math.random() - 0.5) * 550 - 60;
+
+    nodeVelocities.push({
+      x: (Math.random() - 0.5) * 0.32,
+      y: (Math.random() - 0.5) * 0.32,
+      z: (Math.random() - 0.5) * 0.2
+    });
+
+    const rand = Math.random();
+    let col = cyan;
+    if (rand > 0.65) col = violet;
+    else if (rand > 0.85) col = emerald;
+
+    nodeColors[i3] = col.r;
+    nodeColors[i3 + 1] = col.g;
+    nodeColors[i3 + 2] = col.b;
+  }
+
+  const nodesGeometry = new THREE.BufferGeometry();
+  nodesGeometry.setAttribute('position', new THREE.BufferAttribute(nodePositions, 3));
+  nodesGeometry.setAttribute('color', new THREE.BufferAttribute(nodeColors, 3));
+
+  const nodesMaterial = new THREE.PointsMaterial({
+    size: 7.5,
+    map: createPointTexture(),
     vertexColors: true,
     transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending
+    opacity: 0.88,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
   });
 
-  particlesMesh = new THREE.Points(geometry, material);
-  scene.add(particlesMesh);
+  neuralPoints = new THREE.Points(nodesGeometry, nodesMaterial);
+  scene.add(neuralPoints);
 
-  // 2. Interactive Spinning 3D Wireframe Cyber Core (Torus Knot)
-  const coreGeo = new THREE.TorusKnotGeometry(140, 30, 100, 16);
-  const coreMat = new THREE.MeshBasicMaterial({
+  // 2. Dynamic Synapse Connection Lines (Vector Cosine Similary Network)
+  const linePositions = new Float32Array(MAX_LINES * 2 * 3);
+  const lineColors = new Float32Array(MAX_LINES * 2 * 3);
+
+  const linesGeometry = new THREE.BufferGeometry();
+  linesGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+  linesGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+
+  const linesMaterial = new THREE.LineBasicMaterial({
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.55,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+
+  neuralLines = new THREE.LineSegments(linesGeometry, linesMaterial);
+  scene.add(neuralLines);
+
+  // 3. Deep Latent Space Vector Dust (Ambient Depth Stars)
+  const dustCount = 300;
+  const dustGeometry = new THREE.BufferGeometry();
+  const dustPositions = new Float32Array(dustCount * 3);
+
+  for (let i = 0; i < dustCount * 3; i += 3) {
+    dustPositions[i] = (Math.random() - 0.5) * 2200;
+    dustPositions[i + 1] = (Math.random() - 0.5) * 1800;
+    dustPositions[i + 2] = -400 - Math.random() * 1200;
+  }
+
+  dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+  const dustMaterial = new THREE.PointsMaterial({
+    size: 2.2,
     color: 0x00f0ff,
-    wireframe: true,
     transparent: true,
-    opacity: 0.25
+    opacity: 0.35,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
   });
-  cyberCore = new THREE.Mesh(coreGeo, coreMat);
-  cyberCore.position.set(380, 0, -200);
-  scene.add(cyberCore);
 
-  // 3. Inner Glowing Icosahedron
-  const icoGeo = new THREE.IcosahedronGeometry(70, 1);
-  const icoMat = new THREE.MeshBasicMaterial({
-    color: 0xff007f,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.4
-  });
-  innerIco = new THREE.Mesh(icoGeo, icoMat);
-  innerIco.position.set(380, 0, -200);
-  scene.add(innerIco);
+  ambientDustMesh = new THREE.Points(dustGeometry, dustMaterial);
+  scene.add(ambientDustMesh);
 
   document.addEventListener('mousemove', onDocumentMouseMove);
   window.addEventListener('resize', onWindowResize);
@@ -177,18 +226,76 @@ function init3D() {
   function animate() {
     requestAnimationFrame(animate);
 
-    camera.position.x += (mouseX - camera.position.x) * 0.03;
-    camera.position.y += (-mouseY - camera.position.y) * 0.03;
-    camera.lookAt(scene.position);
+    // Silky smooth camera parallax tracking (luxury physics damping)
+    camera.position.x += (targetCamX - camera.position.x) * 0.016;
+    camera.position.y += (-targetCamY - camera.position.y) * 0.016;
+    camera.lookAt(0, 0, 0);
 
-    particlesMesh.rotation.y += 0.0006;
-    particlesMesh.rotation.x += 0.0003;
+    // Ambient dust slow drift
+    ambientDustMesh.rotation.y += 0.00012;
 
-    cyberCore.rotation.x += 0.005;
-    cyberCore.rotation.y += 0.008;
+    // Update Neural Node positions
+    const pos = nodesGeometry.attributes.position.array;
+    for (let i = 0; i < NODE_COUNT; i++) {
+      const i3 = i * 3;
+      const vel = nodeVelocities[i];
 
-    innerIco.rotation.x -= 0.008;
-    innerIco.rotation.y -= 0.01;
+      pos[i3] += vel.x;
+      pos[i3 + 1] += vel.y;
+      pos[i3 + 2] += vel.z;
+
+      // Gentle bounds bounce
+      if (pos[i3] < -720 || pos[i3] > 720) vel.x *= -1;
+      if (pos[i3 + 1] < -480 || pos[i3 + 1] > 480) vel.y *= -1;
+      if (pos[i3 + 2] < -420 || pos[i3 + 2] > 220) vel.z *= -1;
+    }
+    nodesGeometry.attributes.position.needsUpdate = true;
+
+    // Dynamically calculate Synaptic Lines between neighboring nodes
+    let lineIdx = 0;
+    const lPos = linesGeometry.attributes.position.array;
+    const lCol = linesGeometry.attributes.color.array;
+
+    for (let i = 0; i < NODE_COUNT && lineIdx < MAX_LINES; i++) {
+      const i3 = i * 3;
+      const x1 = pos[i3], y1 = pos[i3 + 1], z1 = pos[i3 + 2];
+      const r1 = nodeColors[i3], g1 = nodeColors[i3 + 1], b1 = nodeColors[i3 + 2];
+
+      for (let j = i + 1; j < NODE_COUNT && lineIdx < MAX_LINES; j++) {
+        const j3 = j * 3;
+        const dx = x1 - pos[j3];
+        const dy = y1 - pos[j3 + 1];
+        const dz = z1 - pos[j3 + 2];
+        const distSq = dx * dx + dy * dy + dz * dz;
+
+        if (distSq < MAX_DISTANCE_SQ) {
+          const alpha = (1.0 - Math.sqrt(distSq) / MAX_DISTANCE) * 0.72;
+          const line6 = lineIdx * 6;
+
+          // Segment Vertex 1
+          lPos[line6] = x1;
+          lPos[line6 + 1] = y1;
+          lPos[line6 + 2] = z1;
+          lCol[line6] = r1 * alpha;
+          lCol[line6 + 1] = g1 * alpha;
+          lCol[line6 + 2] = b1 * alpha;
+
+          // Segment Vertex 2
+          lPos[line6 + 3] = pos[j3];
+          lPos[line6 + 4] = pos[j3 + 1];
+          lPos[line6 + 5] = pos[j3 + 2];
+          lCol[line6 + 3] = nodeColors[j3] * alpha;
+          lCol[line6 + 4] = nodeColors[j3 + 1] * alpha;
+          lCol[line6 + 5] = nodeColors[j3 + 2] * alpha;
+
+          lineIdx++;
+        }
+      }
+    }
+
+    linesGeometry.setDrawRange(0, lineIdx * 2);
+    linesGeometry.attributes.position.needsUpdate = true;
+    linesGeometry.attributes.color.needsUpdate = true;
 
     renderer.render(scene, camera);
   }
@@ -197,8 +304,8 @@ function init3D() {
 }
 
 function onDocumentMouseMove(event) {
-  mouseX = (event.clientX - windowHalfX) * 0.5;
-  mouseY = (event.clientY - windowHalfY) * 0.5;
+  targetCamX = (event.clientX - windowHalfX) * 0.1;
+  targetCamY = (event.clientY - windowHalfY) * 0.1;
 }
 
 function onWindowResize() {
@@ -315,6 +422,21 @@ function initSimulators() {
     const modal = document.getElementById('sim-modal');
     if (modal) modal.classList.remove('active');
   };
+
+  // Close modal when clicking the dark backdrop or pressing Escape
+  const simModal = document.getElementById('sim-modal');
+  if (simModal) {
+    simModal.addEventListener('click', (e) => {
+      if (e.target === simModal) {
+        window.closeSimModal();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && simModal.classList.contains('active')) {
+        window.closeSimModal();
+      }
+    });
+  }
 }
 
 // Matrix Rain Animation Engine
@@ -596,6 +718,110 @@ function initCertificateFilters() {
   });
 }
 
+// Recruiter Floating Widget Toggle
+function initRecruiterWidget() {
+  const widget = document.getElementById('recruiter-widget') || document.getElementById('recruiter-panel');
+  const btn = document.getElementById('recruiter-widget-btn') || document.getElementById('recruiter-toggle');
+  if (!widget || !btn) return;
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = widget.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (widget.classList.contains('open') && !widget.contains(e.target)) {
+      widget.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && widget.classList.contains('open')) {
+      widget.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+
+  // Close when any link inside is clicked
+  const links = widget.querySelectorAll('.recruiter-widget-link, .recruiter-panel-link');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      widget.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+// Silky Smooth 3D Interactive Tilt & Glare for Avatar Card
+function initAvatarInteractiveTilt() {
+  const card = document.querySelector('.cyber-avatar-card');
+  const wrapper = document.querySelector('.hero-avatar-wrapper');
+  if (!card || !wrapper) return;
+
+  let isHovered = false;
+  let targetRotX = 0;
+  let targetRotY = 0;
+  let currentRotX = 0;
+  let currentRotY = 0;
+
+  wrapper.addEventListener('mouseenter', () => {
+    isHovered = true;
+    card.classList.add('is-tilting');
+    card.style.transition = 'box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+  });
+
+  wrapper.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Gentle maximum 6.5-degree tilt for subtle luxury feel
+    targetRotX = ((centerY - y) / centerY) * 6.5;
+    targetRotY = ((x - centerX) / centerX) * 6.5;
+
+    // Update dynamic glare position smoothly
+    const glareX = Math.round((x / rect.width) * 100);
+    const glareY = Math.round((y / rect.height) * 100);
+    card.style.setProperty('--glare-x', `${glareX}%`);
+    card.style.setProperty('--glare-y', `${glareY}%`);
+  });
+
+  wrapper.addEventListener('mouseleave', () => {
+    isHovered = false;
+    targetRotX = 0;
+    targetRotY = 0;
+
+    // Smooth return transition
+    card.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.85s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.85s cubic-bezier(0.16, 1, 0.3, 1)';
+    card.style.transform = '';
+
+    setTimeout(() => {
+      if (!isHovered) {
+        card.classList.remove('is-tilting');
+        card.style.transition = '';
+      }
+    }, 850);
+  });
+
+  function renderTilt() {
+    if (isHovered) {
+      // 0.07 lerp for silky smooth physical damping
+      currentRotX += (targetRotX - currentRotX) * 0.07;
+      currentRotY += (targetRotY - currentRotY) * 0.07;
+      card.style.transform = `perspective(1000px) rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg) translateY(-8px) scale3d(1.02, 1.02, 1.02)`;
+    }
+    requestAnimationFrame(renderTilt);
+  }
+  requestAnimationFrame(renderTilt);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   
   initHamburgerMenu();
@@ -606,4 +832,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeTabs();
   initTerminal();
   initCertificateFilters();
+  initRecruiterWidget();
+  initAvatarInteractiveTilt();
 });

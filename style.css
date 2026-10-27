@@ -2,10 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg-primary: #05070f;
-  --bg-secondary: #0a0e1a;
-  --bg-card: rgba(13, 20, 36, 0.75);
-  --bg-card-hover: rgba(18, 28, 52, 0.9);
+  --bg-primary: #030611;
+  --bg-secondary: #070b18;
+  --bg-card: rgba(10, 16, 32, 0.78);
+  --bg-card-hover: rgba(15, 23, 44, 0.92);
   
   --neon-cyan: #00f0ff;
   --neon-violet: #8a2be2;
@@ -82,84 +82,224 @@ body {
   }
   #matrix-canvas { display: none !important; }
   .scanline { display: none !important; }
-  .pulse-dot { animation: none !important; box-shadow: none !important; }
   .btn-enter-cyber.active { animation: none !important; }
   .cyberCore, .innerIco, .particlesMesh { animation: none !important; }
 }
 
-/* CYBERPUNK FLOATING RECRUITER QUICK TOOLS BAR */
-.cyber-recruiter-bar {
+/* CYBERPUNK FLOATING RECRUITER WIDGET (Bottom-Right Corner) */
+.recruiter-widget {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(10, 14, 26, 0.92);
+  bottom: 24px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Trigger Button — Desktop: Sleek Rounded Rectangle */
+.recruiter-widget-btn {
+  position: relative;
+  background: rgba(10, 15, 30, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--neon-cyan);
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-  padding: 10px 24px;
-  border-radius: 40px;
+  border-radius: 12px;
+  padding: 10px 18px;
+  color: #e2e8f0;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
-  z-index: 200;
-  font-family: var(--font-code);
-  flex-wrap: nowrap;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.65), 0 0 16px rgba(0, 240, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  user-select: none;
+  font-family: inherit;
 }
 
-.recruiter-bar-label {
-  font-family: var(--font-hud);
-  font-size: 0.8rem;
-  color: var(--neon-cyan);
-  letter-spacing: 1px;
-  margin-right: 6px;
-  white-space: nowrap;
-}
-
-.cyber-bar-btn {
-  font-family: var(--font-code);
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 7px 16px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-decoration: none;
+.recruiter-btn-desktop-content {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  white-space: nowrap;
+  gap: 9px;
+  font-family: var(--font-hud);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #ffffff;
 }
 
-.cyber-bar-btn svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-  display: inline-block;
-}
-
-.cyber-bar-btn:hover {
-  background: rgba(0, 240, 255, 0.2);
-  border-color: var(--neon-cyan);
+.recruiter-bolt-icon {
   color: var(--neon-cyan);
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+  filter: drop-shadow(0 0 6px var(--neon-cyan));
+  animation: recruiterBoltGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes recruiterBoltGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px var(--neon-cyan));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px var(--neon-cyan));
+    transform: scale(1.08);
+  }
+}
+
+.recruiter-arrow-icon {
+  color: var(--neon-cyan);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.recruiter-widget.open .recruiter-arrow-icon {
+  transform: rotate(180deg);
+}
+
+.recruiter-btn-mobile-content {
+  display: none;
+}
+
+.recruiter-widget-btn:hover {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: #38bdf8;
+  box-shadow: 0 6px 26px rgba(0, 240, 255, 0.45), 0 0 20px rgba(0, 240, 255, 0.3);
   transform: translateY(-2px);
 }
 
-.cyber-bar-btn-primary {
-  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-violet));
-  color: #000;
-  border: none;
-  font-weight: 700;
+.recruiter-widget.open .recruiter-widget-btn {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.55), 0 4px 16px rgba(0, 0, 0, 0.8);
 }
 
-.cyber-bar-btn-primary:hover {
-  color: #000;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+/* Vertical Capsule Popup Menu — Directly Above the Trigger Button */
+.recruiter-widget-menu {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  width: 250px;
+  background: rgba(8, 12, 24, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--neon-cyan);
+  border-radius: 20px;
+  padding: 16px 14px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 240, 255, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(0.95);
+  transform-origin: bottom right;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.25s;
+  pointer-events: none;
+}
+
+.recruiter-widget.open .recruiter-widget-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* Header inside the vertical capsule */
+.recruiter-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px 10px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  font-family: var(--font-hud);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  letter-spacing: 1.5px;
+}
+
+.recruiter-status-indicator {
+  position: relative;
+  width: 5.5px;
+  height: 5.5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.recruiter-status-indicator::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 50%;
+  background-color: #10b981;
+  animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Links inside the vertical menu */
+.recruiter-widget-links {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.recruiter-widget-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  text-decoration: none;
+  font-family: var(--font-code);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.22s ease;
+  cursor: pointer;
+}
+
+.recruiter-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neon-cyan);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.recruiter-link-text {
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.recruiter-widget-link:hover {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--neon-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+  transform: translateX(-3px);
+}
+
+.recruiter-widget-link-primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(138, 43, 226, 0.28));
+  border-color: rgba(0, 240, 255, 0.45);
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+
+.recruiter-widget-link-primary:hover {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.4), rgba(138, 43, 226, 0.45));
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+  color: #ffffff;
 }
 
 /* CYBERPUNK PRELOADER SCREEN */
@@ -326,8 +466,42 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
+}
+
+/* Atmospheric Ambient Aurora Glow Meshes (Deep, Subtle Tech Lighting) */
+.ambient-glow-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -3;
+  overflow: hidden;
+  background: 
+    radial-gradient(circle 800px at 15% 20%, rgba(0, 240, 255, 0.055) 0%, transparent 60%),
+    radial-gradient(circle 850px at 85% 30%, rgba(138, 43, 226, 0.075) 0%, transparent 65%),
+    radial-gradient(circle 900px at 50% 85%, rgba(0, 255, 136, 0.035) 0%, transparent 65%),
+    radial-gradient(circle 600px at 75% 90%, rgba(0, 240, 255, 0.04) 0%, transparent 60%);
+  animation: auroraAtmosphere 22s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes auroraAtmosphere {
+  0% {
+    opacity: 0.85;
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04) translateY(-12px);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.02) translateY(8px);
+  }
 }
 
 /* Matrix Rain Overlay Canvas */
@@ -347,19 +521,20 @@ body {
   opacity: 0.45;
 }
 
-/* Cyber Overlay Grid */
+/* Modern AI Vector / Blueprint Dot Grid with Soft Radial Mask */
 .cyber-grid {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: 
-    linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: radial-gradient(rgba(0, 240, 255, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 40%, black 35%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 40%, black 35%, transparent 95%);
   z-index: -1;
   pointer-events: none;
+  opacity: 0.55;
 }
 
 /* Theme Switcher Bar */
@@ -519,30 +694,81 @@ body {
 .status-badge {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-code);
   font-size: 0.75rem;
-  padding: 6px 12px;
+  padding: 6px 14px;
   background: rgba(0, 255, 136, 0.1);
-  border: 1px solid rgba(0, 255, 136, 0.3);
+  border: 1px solid rgba(0, 255, 136, 0.35);
   border-radius: 20px;
   color: var(--neon-green);
   cursor: pointer;
+  position: relative;
+  overflow: visible;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.status-badge:hover {
+  background: rgba(0, 255, 136, 0.18);
+  border-color: var(--neon-green);
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.4);
+  transform: translateY(-1px);
 }
 
 .pulse-dot {
-  width: 8px;
-  height: 8px;
+  position: relative;
+  width: 5.5px;
+  height: 5.5px;
   background-color: var(--neon-green);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--neon-green);
-  animation: pulse 2s infinite;
+  box-shadow: 0 0 6px var(--neon-green), 0 0 12px rgba(0, 255, 136, 0.45);
+  flex-shrink: 0;
+  display: inline-block;
 }
 
-@keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+/* Vibrant expanding radar ripple */
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 50%;
+  background-color: var(--neon-green);
+  animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Secondary outer radar wave */
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 50%;
+  border: 1.2px solid var(--neon-green);
+  animation: radarRing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite 0.55s;
+  pointer-events: none;
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  65%, 100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes radarRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  75%, 100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
 }
 
 /* Hero Section */
@@ -577,6 +803,7 @@ body {
   align-items: center;
   position: relative;
   width: 100%;
+  perspective: 1200px;
 }
 
 .cyber-avatar-card {
@@ -587,15 +814,32 @@ body {
   padding: 18px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 0 35px rgba(0, 240, 255, 0.25), inset 0 0 20px rgba(0, 240, 255, 0.05);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.22), inset 0 0 20px rgba(0, 240, 255, 0.05);
   max-width: 450px;
   width: 100%;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow, border-color;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: smoothAvatarFloat 6s ease-in-out infinite;
+}
+
+@keyframes smoothAvatarFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+}
+
+.cyber-avatar-card.is-tilting {
+  animation: none !important;
 }
 
 .cyber-avatar-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 50px rgba(0, 240, 255, 0.45), inset 0 0 25px rgba(0, 240, 255, 0.1);
+  box-shadow: 0 12px 55px rgba(0, 240, 255, 0.4), inset 0 0 25px rgba(0, 240, 255, 0.1);
   border-color: var(--neon-cyan);
 }
 
@@ -607,6 +851,27 @@ body {
   overflow: hidden;
   border: 1px solid rgba(0, 240, 255, 0.25);
   background: #020308;
+  transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-avatar-card:hover .avatar-image-container {
+  border-color: rgba(0, 240, 255, 0.5);
+}
+
+/* Subtle interactive holographic glare overlay */
+.avatar-image-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 300px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(0, 240, 255, 0.16), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: screen;
+}
+
+.cyber-avatar-card:hover .avatar-image-container::after {
+  opacity: 1;
 }
 
 .hero-avatar-img {
@@ -615,21 +880,23 @@ body {
   object-fit: cover;
   object-position: center top;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   image-rendering: -webkit-optimize-contrast;
+  will-change: transform;
 }
 
 .cyber-avatar-card:hover .hero-avatar-img {
-  transform: scale(1.03);
+  transform: scale(1.025);
 }
 
-/* Futuristic Tech Corners */
+/* Futuristic Tech Corners with smooth expansion */
 .avatar-corner {
   position: absolute;
   width: 14px;
   height: 14px;
   pointer-events: none;
   z-index: 2;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .corner-tl {
@@ -658,6 +925,34 @@ body {
   right: 8px;
   border-bottom: 2px solid var(--neon-cyan);
   border-right: 2px solid var(--neon-cyan);
+}
+
+.cyber-avatar-card:hover .corner-tl {
+  top: 5px;
+  left: 5px;
+  border-color: #ffffff;
+  filter: drop-shadow(0 0 6px var(--neon-cyan));
+}
+
+.cyber-avatar-card:hover .corner-tr {
+  top: 5px;
+  right: 5px;
+  border-color: #ffffff;
+  filter: drop-shadow(0 0 6px var(--neon-cyan));
+}
+
+.cyber-avatar-card:hover .corner-bl {
+  bottom: 5px;
+  left: 5px;
+  border-color: #ffffff;
+  filter: drop-shadow(0 0 6px var(--neon-cyan));
+}
+
+.cyber-avatar-card:hover .corner-br {
+  bottom: 5px;
+  right: 5px;
+  border-color: #ffffff;
+  filter: drop-shadow(0 0 6px var(--neon-cyan));
 }
 
 .avatar-status-badge {
@@ -767,7 +1062,11 @@ body {
   border-radius: 8px;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease,
+              border-color 0.35s ease,
+              color 0.35s ease;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -843,7 +1142,10 @@ body {
   padding: 24px;
   border-radius: 12px;
   backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .skill-card:hover {
@@ -901,7 +1203,10 @@ body {
   border-radius: 16px;
   overflow: hidden;
   backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
@@ -1310,18 +1615,58 @@ footer {
 @media (max-width: 768px) {
   .hero-title { font-size: 2.2rem; }
   .projects-grid { grid-template-columns: 1fr; }
-  .cyber-recruiter-bar { width: 92%; justify-content: center; overflow-x: auto; }
-  .recruiter-bar-label { display: none; }
   .pdf-controls { gap: 6px; }
   .pdf-controls button, .pdf-controls a { padding: 6px 10px; font-size: 0.7rem; }
   .pdf-viewer-wrapper { min-height: 300px; }
+
+  /* Recruiter widget: circular FAB in bottom-right corner on mobile */
+  .recruiter-widget {
+    bottom: 20px;
+    right: 20px;
+  }
+  .recruiter-widget-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 240, 255, 0.35);
+  }
+  .recruiter-btn-desktop-content {
+    display: none;
+  }
+  .recruiter-btn-mobile-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: var(--neon-cyan);
+  }
+  .recruiter-mobile-icon-close {
+    display: none;
+  }
+  .recruiter-widget.open .recruiter-mobile-icon-open {
+    display: none;
+  }
+  .recruiter-widget.open .recruiter-mobile-icon-close {
+    display: block;
+    color: #ffffff;
+  }
+  .recruiter-widget-menu {
+    bottom: calc(100% + 12px);
+    right: 0;
+    width: min(270px, calc(100vw - 40px));
+    border-radius: 18px;
+    padding: 14px 12px;
+  }
 }
 
 /* Mobile-first touch targets & spacing improvements */
 @media (max-width: 768px) {
   /* Ensure all interactive elements meet 44px minimum touch target */
   .btn-cyber,
-  .cyber-bar-btn,
+  .recruiter-widget-link,
+  .recruiter-widget-btn,
   .tab-btn,
   .skill-tag,
   .tech-pill,
@@ -1423,7 +1768,7 @@ footer {
     white-space: nowrap;
   }
   
-  .status-badge .pulse-dot { width: 6px; height: 6px; }
+  .status-badge .pulse-dot { width: 5px; height: 5px; }
 
   /* Prevent horizontal overflow */
   html, body { overflow-x: hidden; }
@@ -1456,13 +1801,10 @@ footer {
     white-space: nowrap;
   }
   
-  /* Recruiter bar mobile - wrap buttons on small screens */
-  .cyber-recruiter-bar { padding: 8px 16px; gap: 6px; flex-wrap: wrap; }
-  .cyber-bar-btn { 
-    padding: 8px 12px; 
-    font-size: 0.7rem; 
-    white-space: nowrap;
-    flex-shrink: 0;
+  /* Recruiter panel mobile link spacing */
+  .recruiter-panel-link {
+    padding: 12px 14px;
+    font-size: 0.8rem;
   }
   
   /* Resume header buttons */
@@ -1864,8 +2206,10 @@ footer {
   .skill-category-title { font-size: 0.95rem; }
   .project-title { font-size: 1.1rem; }
   .brand-logo { font-size: 0.95rem; }
-  .cyber-recruiter-bar { padding: 6px 10px; gap: 4px; }
-  .cyber-bar-btn { padding: 6px 8px; font-size: 0.65rem; }
+  .recruiter-widget { bottom: 16px; right: 16px; }
+  .recruiter-widget-btn { width: 46px; height: 46px; }
+  .recruiter-widget-link { padding: 9px 12px; font-size: 0.78rem; }
+  .recruiter-widget-menu { width: min(250px, calc(100vw - 32px)); }
   .preloader-title { font-size: 1rem; }
   .preloader-percent { font-size: 1.2rem; }
   .nav-menu { width: 90%; padding: 100px 16px 16px; }
