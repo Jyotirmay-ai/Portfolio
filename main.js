@@ -25,6 +25,26 @@ function initHamburgerMenu() {
     });
   });
   
+  // Brand Logo click: navigate to home or smooth-scroll to top if already on home
+  const brandLogo = document.querySelector('.brand-logo');
+  if (brandLogo) {
+    brandLogo.addEventListener('click', (e) => {
+      navMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+
+      const isIndex = !window.location.pathname.includes('certificates');
+      if (isIndex) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.location.hash) {
+          history.pushState(null, '', window.location.pathname);
+        }
+      }
+    });
+  }
+
   // Close menu on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navMenu.classList.contains('open')) {
