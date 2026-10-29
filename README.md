@@ -42,9 +42,8 @@ A high-performance, cyberpunk HUD-inspired portfolio and interactive verified cr
 * **Particle Field & Torus Knot Wireframe**: Real-time WebGL neural mesh with depth fog and mouse parallax response.
 * **3D Avatar Frame**: Physical tilt damping with dynamic light glare responding to cursor position.
 
-### 7. 💻 Interactive Cyber Terminal & Simulations
+### 7. 💻 Interactive Cyber Terminal
 * **HUD Terminal CLI**: Functional command line supporting `help`, `bio`, `skills`, `projects`, `certs`, `clear`, `history`, and tab autocompletion.
-* **Live Pipeline Simulators**: Interactive models demonstrating RAR (Retrieval-Augmented Ranking) and Tor Ghost Protocol routing.
 
 ---
 
