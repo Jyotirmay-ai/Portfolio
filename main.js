@@ -73,12 +73,12 @@ function initPreloader() {
   if (!preloader || !barFill || !percentText) return;
 
   const bootLogs = [
-    "> loading assets...",
-    "> initializing 3d engine...",
-    "> rendering particles...",
-    "> mounting components...",
-    "> applying theme...",
-    "> ready."
+    "> establishing <span style=\"color:var(--neon-cyan)\">TLS 1.3</span> encrypted channel...",
+    "> validating <span style=\"color:var(--neon-cyan)\">CSP & anti-xss</span> defenses <span style=\"color:#00ff88\">[PASS]</span>",
+    "> zero-trust firewall: origin verified <span style=\"color:#00ff88\">[OK]</span>",
+    "> initializing 3D neural matrix...",
+    "> mounting core interfaces...",
+    "> security shield armed. <span style=\"color:#00ff88\">ready.</span>"
   ];
 
   let progress = 0;
@@ -95,7 +95,7 @@ function initPreloader() {
     if (targetLogIndex > logIndex && logIndex < bootLogs.length) {
       const line = document.createElement('div');
       line.className = 'log-line';
-      line.innerText = bootLogs[logIndex];
+      line.innerHTML = bootLogs[logIndex];
       logsContainer.appendChild(line);
       logsContainer.scrollTop = logsContainer.scrollHeight;
       logIndex++;
@@ -103,14 +103,28 @@ function initPreloader() {
 
     if (progress >= 100) {
       clearInterval(interval);
+      const badgeText = preloader.querySelector('.sec-badge-text');
+      const pulseDot = preloader.querySelector('.sec-pulse-dot');
+      if (badgeText) badgeText.innerText = 'SESSION ENCRYPTED // ACCESS GRANTED';
+      if (pulseDot) {
+        pulseDot.style.background = '#00ff88';
+        pulseDot.style.boxShadow = '0 0 10px #00ff88';
+      }
+
       if (enterBtn) {
         enterBtn.classList.add('active');
-        enterBtn.addEventListener('click', () => {
+        const dismiss = () => {
           preloader.classList.add('fade-out');
-        });
+          window.removeEventListener('keydown', handleKey);
+        };
+        const handleKey = (e) => {
+          if (e.key === 'Enter') dismiss();
+        };
+        enterBtn.addEventListener('click', dismiss);
+        window.addEventListener('keydown', handleKey);
       }
     }
-  }, 80);
+  }, 75);
 }
 
 function init3D() {
@@ -928,8 +942,140 @@ function initAvatarInteractiveTilt() {
   requestAnimationFrame(renderTilt);
 }
 
+// Unique IP Visitor Counter Engine
+async function initVisitorCounter() {
+  const counterElements = document.querySelectorAll('.visitor-count');
+  if (!counterElements.length) return;
+
+  const COUNTER_KEY = 'jyotirmaybiswas_portfolio_visitors_v1';
+  const API_BASE = 'https://countapi.mileshilliard.com/api/v1';
+  const STORAGE_KEY_VISITED = 'jb_portfolio_has_visited';
+  const STORAGE_KEY_SESSION = 'jb_portfolio_session_seen';
+  const STORAGE_KEY_IP_HASH = 'jb_portfolio_ip_hash';
+  const STORAGE_KEY_LAST_COUNT = 'jb_portfolio_last_count';
+
+  function renderCount(val) {
+    if (!val || isNaN(val)) return;
+    const num = parseInt(val, 10);
+    const formatted = num.toLocaleString();
+    counterElements.forEach(el => {
+      el.innerText = formatted;
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY_LAST_COUNT, num.toString());
+    } catch {}
+  }
+
+  // Pre-fill with last known count if available to avoid layout jump
+  const cachedCount = localStorage.getItem(STORAGE_KEY_LAST_COUNT);
+  if (cachedCount) {
+    renderCount(cachedCount);
+  }
+
+  // Fast SHA-256 hash for IP privacy & deduplication
+  async function hashIP(ip) {
+    try {
+      const msgBuffer = new TextEncoder().encode(ip.trim());
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 24);
+    } catch {
+      return btoa(ip).slice(0, 24);
+    }
+  }
+
+  // Safe fetch with timeout
+  async function fetchWithTimeout(url, options = {}, timeoutMs = 3500) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { ...options, signal: controller.signal });
+      clearTimeout(timer);
+      return response;
+    } catch (err) {
+      clearTimeout(timer);
+      throw err;
+    }
+  }
+
+  try {
+    const previouslyVisitedLocal = localStorage.getItem(STORAGE_KEY_VISITED) === 'true';
+    const previouslyVisitedSession = sessionStorage.getItem(STORAGE_KEY_SESSION) === 'true';
+    const storedIpHash = localStorage.getItem(STORAGE_KEY_IP_HASH);
+
+    let isReturning = previouslyVisitedLocal || previouslyVisitedSession;
+
+    let currentIpHash = null;
+    try {
+      const ipRes = await fetchWithTimeout('https://api.ipify.org?format=json', { cache: 'no-store' }, 2800);
+      if (ipRes.ok) {
+        const ipData = await ipRes.json();
+        if (ipData && ipData.ip) {
+          currentIpHash = await hashIP(ipData.ip);
+          if (storedIpHash && currentIpHash === storedIpHash) {
+            isReturning = true;
+          }
+        }
+      }
+    } catch (ipErr) {
+      // If ipify is unreachable, fallback to browser storage flag
+    }
+
+    if (isReturning) {
+      // Returning visit from the same IP/network: Read count only without incrementing
+      const getRes = await fetchWithTimeout(`${API_BASE}/get/${COUNTER_KEY}`);
+      if (getRes.ok) {
+        const data = await getRes.json();
+        renderCount(data.value);
+      }
+    } else {
+      // Guard flags immediately in session & local storage to prevent duplicate increments
+      try {
+        sessionStorage.setItem(STORAGE_KEY_SESSION, 'true');
+        localStorage.setItem(STORAGE_KEY_VISITED, 'true');
+        if (currentIpHash) {
+          localStorage.setItem(STORAGE_KEY_IP_HASH, currentIpHash);
+        }
+      } catch {}
+
+      // First visit from this unique IP: Increment counter by 1
+      const hitRes = await fetchWithTimeout(`${API_BASE}/hit/${COUNTER_KEY}`);
+      if (hitRes.ok) {
+        const data = await hitRes.json();
+        renderCount(data.value);
+      } else {
+        const fallbackRes = await fetchWithTimeout(`${API_BASE}/get/${COUNTER_KEY}`);
+        if (fallbackRes.ok) {
+          const fallbackData = await fallbackRes.json();
+          renderCount(fallbackData.value);
+        }
+      }
+    }
+  } catch (err) {
+    // Graceful offline fallback
+    if (!cachedCount) {
+      renderCount(1);
+    }
+  }
+
+  // Click & tap toggle support
+  const badges = document.querySelectorAll('.visitor-counter-badge');
+  badges.forEach(badge => {
+    badge.addEventListener('click', (e) => {
+      badge.classList.toggle('tooltip-open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    badges.forEach(badge => {
+      if (!badge.contains(e.target)) {
+        badge.classList.remove('tooltip-open');
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  
   initHamburgerMenu();
   initPreloader();
   init3D();
@@ -941,4 +1087,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initRecruiterWidget();
   initAvatarInteractiveTilt();
   initDocPreview();
+  initVisitorCounter();
 });

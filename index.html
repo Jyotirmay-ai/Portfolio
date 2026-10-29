@@ -71,8 +71,12 @@
   <!-- Preloader Overlay -->
   <div id="cyber-preloader">
     <div class="preloader-frame">
+      <div class="preloader-top-badge">
+        <span class="sec-pulse-dot"></span>
+        <span class="sec-badge-text">SECURE PROTOCOL // ZERO-TRUST ARMED</span>
+      </div>
       <div class="preloader-header">
-        <div class="preloader-title">Initializing</div>
+        <div class="preloader-title">INITIALIZING</div>
         <div class="preloader-percent" id="preloader-percent">0%</div>
       </div>
       <div class="preloader-bar-track">
@@ -81,6 +85,13 @@
       <div class="preloader-logs" id="preloader-logs"></div>
       <div class="enter-btn-wrapper">
         <button id="enter-btn" class="btn-enter-cyber">Enter</button>
+      </div>
+      <div class="preloader-sec-telemetry">
+        <span class="sec-tag">SHIELD: ACTIVE</span>
+        <span class="sec-divider">//</span>
+        <span class="sec-tag">CSP: STRICT</span>
+        <span class="sec-divider">//</span>
+        <span class="sec-tag">ANTI-XSS: ARMED</span>
       </div>
     </div>
   </div>
@@ -166,6 +177,30 @@
         <div class="status-badge" onclick="openCareerGoalModal()" title="Click to view Career Goal & Learning Roadmap">
           <div class="pulse-dot"></div>
           Target: AI Engineer
+        </div>
+        <div class="visitor-counter-badge" id="visitor-counter-badge" tabindex="0" role="status" aria-label="Unique Visitor Counter">
+          <span class="visitor-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </span>
+          <span class="visitor-label">VISITORS:</span>
+          <span class="visitor-count" id="visitor-count">...</span>
+
+          <div class="visitor-tooltip" role="tooltip">
+            <div class="tooltip-header">
+              <span class="tooltip-dot"></span>
+              <span class="tooltip-title">HOW THIS COUNTER WORKS</span>
+            </div>
+            <p class="tooltip-body">
+              This counter uses <strong>Unique IP Deduplication</strong>. When you visit from your network, your session is verified and counted once. Reopening, refreshing, or browsing other pages from the same IP will <em>not</em> inflate the count.
+            </p>
+            <div class="tooltip-footer">
+              <span class="tooltip-tag">DEDUPLICATION: ACTIVE</span>
+              <span class="tooltip-tag-status">1 IP = 1 COUNT</span>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
