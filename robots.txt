@@ -4,6 +4,7 @@
 User-agent: *
 Allow: /
 Allow: /index.html
+Allow: /certificates
 Allow: /certificates.html
 Allow: /certificates/
 Allow: /my_resume.pdf

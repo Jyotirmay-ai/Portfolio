@@ -25,24 +25,29 @@ A high-performance, cyberpunk HUD-inspired portfolio and interactive verified cr
 * **Anti-Inflation**: Reopening tabs, refreshing pages, or navigating between pages does not inflate the count.
 * **Interactive Tooltip**: Hover (or tap on mobile) displays an informative description of the deduplication protocol.
 
-### 3. 📄 Document & Certificate Preview Modal
+### 3. 🕒 Recent Updates & Changelog HUD
+* **Top-Right Telemetry Widget**: Displays real-time portfolio updates with live ISO timestamps.
+* **Live GitHub Sync**: Queries GitHub repository commits API for real-time deployment logs with graceful offline changelog fallback.
+* **Interactive Dropdown Panel**: Expandable audit trail detailing versions, security deployments, and milestone commits.
+
+### 4. 📄 Document & Certificate Preview Modal
 * **In-Page PDF Viewer**: Direct preview of all 20 verified certificates and official resume without navigating away.
 * **HUD Action Bar**: Quick controls for **Full Screen**, **Open in New Tab**, **Download PDF**, and **Copy Document Link** with animated toast notifications.
 
-### 4. 🧭 Mathematically Centered Navigation
+### 5. 🧭 Mathematically Centered Navigation
 * **Balanced 3-Column Layout**: Left brand identifier (`[JB.DEV]`), true dead-center menu routing (`About`, `Skills`, `Projects`, `Resume_HUD`, `Terminal`, `Contact`), and far-right status telemetry (`Target: AI Engineer` + Visitor Counter).
 * **Responsive Drawer**: Seamless transition to a cyberpunk slide-out menu on mobile and tablet viewports.
 
-### 5. ⚡ Cyberpunk Boot Sequence Preloader
+### 6. ⚡ Boot Sequence Preloader
 * **Zero-Trust Diagnostics**: Real-time animated boot logs validating TLS 1.3 encryption, CSP filters, and neural matrix rendering.
 * **Dynamic Security Badge**: Pulsing status dot transitioning to `SESSION ENCRYPTED // ACCESS GRANTED` upon completion.
 * **Keyboard Accessible**: Dismissible via mouse click or physical <kbd>Enter</kbd> key.
 
-### 6. 🌐 3D Neural Three.js Engine & Holographic Avatar
+### 7. 🌐 3D Neural Three.js Engine & Holographic Avatar
 * **Particle Field & Torus Knot Wireframe**: Real-time WebGL neural mesh with depth fog and mouse parallax response.
 * **3D Avatar Frame**: Physical tilt damping with dynamic light glare responding to cursor position.
 
-### 7. 💻 Interactive Cyber Terminal
+### 8. 💻 Interactive Cyber Terminal
 * **HUD Terminal CLI**: Functional command line supporting `help`, `bio`, `skills`, `projects`, `certs`, `clear`, `history`, and tab autocompletion.
 
 ---

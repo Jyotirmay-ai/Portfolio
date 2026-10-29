@@ -12,27 +12,36 @@ function initHamburgerMenu() {
     const isOpen = navMenu.classList.toggle('open');
     hamburger.classList.toggle('active', isOpen);
     hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.classList.toggle('nav-open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
   
+  // Close menu helper
+  const closeMenu = () => {
+    navMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = '';
+  };
+
   // Close menu when clicking a link
   navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu when tapping outside (backdrop click)
+  document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMenu();
+    }
   });
   
   // Brand Logo click: navigate to home or smooth-scroll to top if already on home
   const brandLogo = document.querySelector('.brand-logo');
   if (brandLogo) {
     brandLogo.addEventListener('click', (e) => {
-      navMenu.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      closeMenu();
 
       const isIndex = !window.location.pathname.includes('certificates');
       if (isIndex) {
@@ -48,10 +57,7 @@ function initHamburgerMenu() {
   // Close menu on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navMenu.classList.contains('open')) {
-      navMenu.classList.remove('open');
-      hamburger.classList.remove('active');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      closeMenu();
     }
   });
 }
@@ -677,7 +683,7 @@ Computer Science undergraduate passionate about Artificial Intelligence, Data Sc
 - <span style="color: var(--neon-cyan)">Hackathons & Tech:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space, 4th Regional Conclave
 - <span style="color: #c084fc">Industry Simulations:</span> Deloitte Cyber Security, Deloitte Technology, Tata Cybersecurity Analyst, EA Sports
 - <span style="color: #ffbd2e">Academics:</span> B.Tech CSE (3rd/4th Sems), Diploma in CST, Secondary Board Record
-Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
+Explore all records: <a href="certificates" style="color:var(--neon-green); text-decoration:underline;">/certificates</a>`,
 
     certificates: `<span style="color: var(--neon-cyan)">[VERIFIED CERTIFICATIONS ARCHIVE - 20 RECORDS]</span>
 - <span style="color: var(--neon-green)">AI & Data Science:</span> Kharagpur Data Science Hackathon (IIT Kharagpur), Ultimate Data Science Course
@@ -685,7 +691,7 @@ Explore all records: <a href="certificates.html" style="color:var(--neon-green);
 - <span style="color: var(--neon-cyan)">Hackathons & Tech:</span> Smart India Hackathon (SIH 2026), Adobe GenSolve, IIT-KGP Fugacity, HackShastra (R1 & R2), Srijan, Product Space, 4th Regional Conclave
 - <span style="color: #c084fc">Industry Simulations:</span> Deloitte Cyber Security, Deloitte Technology, Tata Cybersecurity Analyst, EA Sports
 - <span style="color: #ffbd2e">Academics:</span> B.Tech CSE (3rd/4th Sems), Diploma in CST, Secondary Board Record
-Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
+Explore all records: <a href="certificates" style="color:var(--neon-green); text-decoration:underline;">/certificates</a>`,
 
     skills: `<span style="color: var(--neon-cyan)">[TECHNICAL SKILLS MATRIX]</span>
 - Programming Languages: Python, Java (Basics)
@@ -1075,6 +1081,108 @@ async function initVisitorCounter() {
   });
 }
 
+// Cyber Recent Updates HUD Widget with Live GitHub Sync
+function initRecentUpdatesWidget() {
+  const widget = document.getElementById('recent-updates-widget');
+  const triggerBtn = document.getElementById('updates-trigger-btn');
+  const headerTime = document.getElementById('header-update-time');
+  const updatesList = document.getElementById('updates-list');
+
+  if (!widget || !triggerBtn) return;
+
+  // Toggle dropdown on click
+  triggerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = widget.classList.toggle('open');
+    triggerBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!widget.contains(e.target) && widget.classList.contains('open')) {
+      widget.classList.remove('open');
+      triggerBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && widget.classList.contains('open')) {
+      widget.classList.remove('open');
+      triggerBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Helper: Format commit date to clean HUD timestamp
+  const formatUpdateTime = (isoStr) => {
+    try {
+      const d = new Date(isoStr);
+      if (isNaN(d.getTime())) return 'OCT 29, 2026';
+      
+      const now = new Date();
+      const diffMs = now - d;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMins / 60);
+      const diffDays = Math.floor(diffHours / 24);
+
+      if (diffMins < 60) return `${diffMins || 1}M AGO`;
+      if (diffHours < 24) return `${diffHours}H AGO`;
+      if (diffDays <= 7) return `${diffDays}D AGO`;
+
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase();
+    } catch {
+      return 'OCT 29, 2026';
+    }
+  };
+
+  // Helper: Escape HTML strings from GitHub commit messages
+  const sanitize = (str) => {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  };
+
+  // Live GitHub commits fetch
+  fetch('https://api.github.com/repos/Jyotirmay-ai/Portfolio/commits?per_page=3')
+    .then(res => res.ok ? res.json() : null)
+    .then(commits => {
+      if (!Array.isArray(commits) || commits.length === 0) return;
+
+      const latestCommit = commits[0];
+      const latestDateStr = latestCommit?.commit?.author?.date || latestCommit?.commit?.committer?.date;
+      
+      if (headerTime && latestDateStr) {
+        headerTime.innerText = formatUpdateTime(latestDateStr);
+      }
+
+      if (updatesList) {
+        // Prepend live commits from GitHub
+        const liveItems = commits.map((item) => {
+          const rawMsg = item.commit?.message?.split('\n')[0] || 'Repository Update';
+          const msg = sanitize(rawMsg);
+          const date = new Date(item.commit?.author?.date || item.commit?.committer?.date);
+          const timeStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase() + 
+            ' • ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false }) + ' UTC';
+          const shaShort = item.sha ? item.sha.substring(0, 7) : 'git';
+
+          return `
+            <div class="update-item" style="border-left-color: var(--neon-cyan);">
+              <div class="update-item-meta">
+                <span class="update-item-time">${timeStr}</span>
+                <span class="update-badge tag-ui">${shaShort}</span>
+              </div>
+              <div class="update-item-title">${msg}</div>
+              <div class="update-item-desc">Verified GitHub repository commit pushed to branch <code>main</code>.</div>
+            </div>
+          `;
+        }).join('');
+
+        updatesList.innerHTML = liveItems;
+      }
+    })
+    .catch(() => {
+      // Graceful offline fallback: keep the verified updates pre-rendered in HTML
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initHamburgerMenu();
   initPreloader();
@@ -1088,4 +1196,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initAvatarInteractiveTilt();
   initDocPreview();
   initVisitorCounter();
+  initRecentUpdatesWidget();
 });

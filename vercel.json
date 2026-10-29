@@ -1,12 +1,23 @@
 {
   "version": 2,
   "outputDirectory": ".",
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
     {
-      "src": "^/(\\.(git|env|agents)|package(-lock)?\\.json|vercel\\.json)",
+      "src": "^/(\\.(git|env|agents)|package(-lock)?\\.json|vercel\\.json|serve\\.json)",
       "status": 404
+    },
+    {
+      "src": "^/certificates\\.html$",
+      "status": 308,
+      "headers": {
+        "Location": "/certificates"
+      }
+    },
+    {
+      "src": "^/certificates$",
+      "dest": "/certificates.html"
     },
     {
       "handle": "filesystem"
@@ -18,7 +29,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://countapi.mileshilliard.com https://api.ipify.org; frame-src 'self'; object-src 'self'; base-uri 'self'; form-action 'self' https://mail.google.com; frame-ancestors 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://countapi.mileshilliard.com https://api.ipify.org https://api.github.com; frame-src 'self'; object-src 'self'; base-uri 'self'; form-action 'self' https://mail.google.com; frame-ancestors 'self';"
         },
         {
           "key": "X-Frame-Options",

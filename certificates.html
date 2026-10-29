@@ -9,7 +9,7 @@
     content="3D Tech Career Portfolio Certificates of Jyotirmay Biswas - Aspiring AI Engineer & Data Scientist specializing in RAG, vector search & LLMs.">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <link rel="canonical" href="https://www.jyotirmaybiswas.tech/certificates.html">
+  <link rel="canonical" href="https://www.jyotirmaybiswas.tech/certificates">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
   <link rel="apple-touch-icon" href="favicon.jpg">
@@ -172,6 +172,79 @@
       </div>
     </nav>
   </header>
+
+  <!-- Cyberpunk Recent Updates HUD Widget (Top-Right Corner) -->
+  <div class="recent-updates-widget" id="recent-updates-widget">
+    <button class="updates-trigger-btn" id="updates-trigger-btn" aria-label="Toggle Recent Updates" aria-haspopup="true" aria-expanded="false">
+      <span class="update-pulse-dot"></span>
+      <span class="update-trigger-text">
+        <span class="update-label">UPDATES</span>
+        <span class="update-sep">//</span>
+        <span class="update-timestamp" id="header-update-time">OCT 29, 2026</span>
+      </span>
+      <svg class="update-arrow-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+
+    <!-- Dropdown Changelog Menu -->
+    <div class="updates-dropdown-menu" id="updates-dropdown-menu" role="menu" aria-label="Recent Updates Changelog">
+      <div class="updates-dropdown-header">
+        <div class="updates-header-left">
+          <span class="telemetry-live-dot"></span>
+          <span class="updates-header-title">SYSTEM CHANGELOG</span>
+        </div>
+        <span class="updates-status-tag">LIVE FEED</span>
+      </div>
+
+      <div class="updates-list" id="updates-list">
+        <div class="update-item">
+          <div class="update-item-meta">
+            <span class="update-item-time">29 OCT 2026 • 14:25 IST</span>
+            <span class="update-badge tag-ui">v5.2</span>
+          </div>
+          <div class="update-item-title">Mobile Layout & Touch UX Overhaul</div>
+          <div class="update-item-desc">Resolved viewport overflow, backdrop blur drawer, swipeable filters & touch-safe modals.</div>
+        </div>
+
+        <div class="update-item">
+          <div class="update-item-meta">
+            <span class="update-item-time">29 OCT 2026 • 13:40 IST</span>
+            <span class="update-badge tag-feat">v5.0</span>
+          </div>
+          <div class="update-item-title">Unique IP Visitor Counter Deployed</div>
+          <div class="update-item-desc">1 IP = 1 Count deduplicated traffic counter with session guards and telemetry tooltip.</div>
+        </div>
+
+        <div class="update-item">
+          <div class="update-item-meta">
+            <span class="update-item-time">28 OCT 2026 • 18:20 IST</span>
+            <span class="update-badge tag-sec">v4.0</span>
+          </div>
+          <div class="update-item-title">Enterprise Security Shield & CSP v3</div>
+          <div class="update-item-desc">Configured Content Security Policy v3, DOM XSS sanitization, anti-clickjacking & probe shielding.</div>
+        </div>
+
+        <div class="update-item">
+          <div class="update-item-meta">
+            <span class="update-item-time">27 OCT 2026 • 21:30 IST</span>
+            <span class="update-badge tag-cred">v3.0</span>
+          </div>
+          <div class="update-item-title">Verified Credentials Archive (20 Records)</div>
+          <div class="update-item-desc">Published KDSH 2026, SIH 2026, ISRO, and industry simulation credential records with in-page viewer.</div>
+        </div>
+      </div>
+
+      <div class="updates-dropdown-footer">
+        <a href="https://github.com/Jyotirmay-ai/Portfolio/commits" target="_blank" rel="noopener noreferrer" class="updates-git-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>View Full Git Commits History →</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- Certificates Section -->
   <section class="section-container" id="certificates">
