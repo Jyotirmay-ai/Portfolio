@@ -459,6 +459,80 @@ function initSimulators() {
   }
 }
 
+// Document Preview Modal Engine (Certificates & Resume)
+function initDocPreview() {
+  window.openDocPreview = function(url, title = 'Document Preview', issuer = '') {
+    const modal = document.getElementById('doc-preview-modal');
+    const iframe = document.getElementById('doc-modal-iframe');
+    const titleEl = document.getElementById('doc-modal-title');
+    const issuerEl = document.getElementById('doc-modal-issuer');
+    const newTabEl = document.getElementById('doc-modal-newtab');
+    const downloadEl = document.getElementById('doc-modal-download');
+    const loader = document.getElementById('doc-modal-loader');
+    
+    if (!modal || !iframe) return;
+
+    if (titleEl) titleEl.innerText = title;
+    if (issuerEl) issuerEl.innerText = issuer || 'Verified Credential Archive';
+    if (newTabEl) newTabEl.href = url;
+    if (downloadEl) downloadEl.href = url;
+
+    if (loader) loader.style.display = 'flex';
+
+    // Set PDF src with embedded viewer parameters
+    iframe.src = url + '#toolbar=1&navpanes=0';
+    iframe.onload = () => {
+      if (loader) loader.style.display = 'none';
+    };
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeDocPreview = function() {
+    const modal = document.getElementById('doc-preview-modal');
+    const iframe = document.getElementById('doc-modal-iframe');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    if (iframe) {
+      setTimeout(() => {
+        iframe.src = 'about:blank';
+      }, 250);
+    }
+  };
+
+  const docModal = document.getElementById('doc-preview-modal');
+  if (docModal) {
+    docModal.addEventListener('click', (e) => {
+      if (e.target === docModal) {
+        window.closeDocPreview();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && docModal.classList.contains('active')) {
+        window.closeDocPreview();
+      }
+    });
+  }
+
+  // Intercept all certificate view buttons for instant in-page preview
+  document.addEventListener('click', (e) => {
+    const viewBtn = e.target.closest('.btn-cert-view');
+    if (viewBtn) {
+      const url = viewBtn.getAttribute('href');
+      if (url && url.endsWith('.pdf')) {
+        e.preventDefault();
+        const card = viewBtn.closest('.certificate-card');
+        const title = card ? card.querySelector('.certificate-title')?.innerText : 'Verified Certificate';
+        const issuer = card ? card.querySelector('.certificate-issuer')?.innerText : '';
+        window.openDocPreview(url, title, issuer);
+      }
+    }
+  });
+}
+
 // Matrix Rain Animation Engine
 function initMatrixRain() {
   const canvas = document.getElementById('matrix-canvas');
@@ -522,10 +596,10 @@ Contact: Kolkata, India | jyotirmaybiswas.workspace@gmail.com | +91 8017760704
 Computer Science undergraduate actively building toward a career as an AI Engineer and Data Scientist. Possesses strong Python fundamentals and hands-on project experience — including a 2-stage AI candidate ranking system using vector search (SBERT, FAISS) and LLM explainable scoring. Eager to join an engineering or data team to learn, contribute, and build scalable AI solutions.
 
 ## TECHNICAL SKILLS
+- Programming Languages: Python, Java (Basics)
 - AI/ML & Vector Search: SentenceTransformers (SBERT), FAISS Vector Indexing, Groq LLM API (Llama-3.1), RAG Pipelines, TF-IDF
-- Data Science & Data Analytics: Pandas, NumPy, Data Cleaning, Statistical Pre-filtering, Feature Processing
-- Programming & Web: Python, JavaScript, HTML5, CSS3, Flask, Socket.IO, REST APIs
-- Tools & Operating Systems: Linux, Docker, Git, VS Code, Cursor, Claude Code, MySQL
+- Data Science & Data Analytics: Pandas, NumPy, Data Cleaning & Quality, Statistical Pre-filtering, Feature Processing, Model Evaluation
+- Tools & Operating Systems: Linux, Docker, Git / GitHub, VS Code, Claude Code
 
 ## FEATURED PROJECTS
 1. AI Candidate Ranking System (2026):
@@ -600,10 +674,10 @@ Explore all records: <a href="certificates.html" style="color:var(--neon-green);
 Explore all records: <a href="certificates.html" style="color:var(--neon-green); text-decoration:underline;">certificates.html</a>`,
 
     skills: `<span style="color: var(--neon-cyan)">[TECHNICAL SKILLS MATRIX]</span>
-- AI/ML & NLP: SentenceTransformers (SBERT), FAISS Vector Index, Groq LLM API (Llama-3.1), RAG Architectures
-- Data Science & Data Engineering: Pandas, NumPy, Data Cleaning, Statistical Pre-filtering
-- Languages & Web: Python, JavaScript, HTML5, CSS3, Flask, Socket.IO, REST APIs
-- Environment: Linux, Docker, Git, MySQL`,
+- Programming Languages: Python, Java (Basics)
+- AI/ML & Vector Search: SentenceTransformers (SBERT), FAISS Vector Index, Groq LLM API (Llama-3.1), RAG Architectures, TF-IDF
+- Data Science & Analytics: Pandas, NumPy, Data Cleaning & Quality, Statistical Pre-filtering, Feature Processing, Model Evaluation
+- Tools & OS Environment: Linux, Docker, Git / GitHub, VS Code, Claude Code`,
 
     projects: `<span style="color: var(--neon-cyan)">[FEATURED PROJECTS]</span>
 1. <span style="color: var(--neon-pink)">AI Candidate Ranking System</span> (Python, SBERT, FAISS, Groq LLM)
@@ -854,4 +928,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCertificateFilters();
   initRecruiterWidget();
   initAvatarInteractiveTilt();
+  initDocPreview();
 });
