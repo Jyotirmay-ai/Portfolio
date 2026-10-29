@@ -721,13 +721,25 @@ Type <span style="color: var(--neon-cyan)">clear</span> to clear terminal.`
     input.setSelectionRange(input.value.length, input.value.length);
   }
 
+  function escapeHTML(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[&<>'"]/g, tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag));
+  }
+
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const val = input.value.trim().toLowerCase();
+      const safeVal = escapeHTML(val);
 
       const cmdLine = document.createElement('div');
       cmdLine.className = 'terminal-line';
-      cmdLine.innerHTML = `<span class="terminal-prompt">jyotirmay@portfolio-hud:~$</span> ${val}`;
+      cmdLine.innerHTML = `<span class="terminal-prompt">jyotirmay@portfolio-hud:~$</span> ${safeVal}`;
       body.appendChild(cmdLine);
 
       addToHistory(val);
@@ -750,7 +762,7 @@ Type <span style="color: var(--neon-cyan)">clear</span> to clear terminal.`
         const errLine = document.createElement('div');
         errLine.className = 'terminal-line';
         errLine.style.color = '#ff5f56';
-        errLine.innerHTML = `Command not recognized: '${val}'. Type <span style="color: var(--neon-cyan)">help</span> for available commands.`;
+        errLine.innerHTML = `Command not recognized: '${safeVal}'. Type <span style="color: var(--neon-cyan)">help</span> for available commands.`;
         body.appendChild(errLine);
       }
 

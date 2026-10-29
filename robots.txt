@@ -1,0 +1,25 @@
+# Robots.txt for https://www.jyotirmaybiswas.tech/
+# Security & Crawler Policy
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /certificates.html
+Allow: /certificates/
+Allow: /my_resume.pdf
+
+# Disallow scanner and probe paths
+Disallow: /.git/
+Disallow: /.env*
+Disallow: /.agents/
+Disallow: /node_modules/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /vercel.json
+
+# Block aggressive / scrapers
+User-agent: ByteSpider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
