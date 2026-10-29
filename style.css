@@ -794,44 +794,77 @@ body {
 
 .pulse-dot {
   position: relative;
-  width: 5.5px;
-  height: 5.5px;
+  width: 6px;
+  height: 6px;
   background-color: var(--neon-green);
   border-radius: 50%;
   box-shadow: 0 0 6px var(--neon-green), 0 0 12px rgba(0, 255, 136, 0.45);
   flex-shrink: 0;
   display: inline-block;
+  overflow: visible;
 }
 
 /* Vibrant expanding radar ripple */
 .pulse-dot::before {
   content: '';
+  display: block;
   position: absolute;
-  inset: -1.5px;
+  inset: -2px;
   border-radius: 50%;
   background-color: var(--neon-green);
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+  will-change: transform, opacity;
   animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  -webkit-animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
   pointer-events: none;
 }
 
 /* Secondary outer radar wave */
 .pulse-dot::after {
   content: '';
+  display: block;
   position: absolute;
-  inset: -1.5px;
+  inset: -2px;
   border-radius: 50%;
-  border: 1.2px solid var(--neon-green);
+  border: 1.5px solid var(--neon-green);
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+  will-change: transform, opacity;
   animation: radarRing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite 0.55s;
+  -webkit-animation: radarRing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite 0.55s;
   pointer-events: none;
 }
 
 @keyframes radarPing {
   0% {
     transform: scale(1);
+    -webkit-transform: scale(1);
     opacity: 0.85;
   }
-  65%, 100% {
-    transform: scale(2.8);
+  65% {
+    transform: scale(3);
+    -webkit-transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3);
+    -webkit-transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes radarPing {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0.85;
+  }
+  65% {
+    -webkit-transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(3);
     opacity: 0;
   }
 }
@@ -839,10 +872,32 @@ body {
 @keyframes radarRing {
   0% {
     transform: scale(1);
+    -webkit-transform: scale(1);
     opacity: 0.9;
   }
-  75%, 100% {
-    transform: scale(3.2);
+  75% {
+    transform: scale(3.5);
+    -webkit-transform: scale(3.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3.5);
+    -webkit-transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes radarRing {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0.9;
+  }
+  75% {
+    -webkit-transform: scale(3.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(3.5);
     opacity: 0;
   }
 }
@@ -1048,17 +1103,39 @@ body {
   height: 6.5px;
   background-color: var(--neon-cyan);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan), 0 0 14px rgba(0, 240, 255, 0.5);
   flex-shrink: 0;
+  display: inline-block;
+  overflow: visible;
 }
 
 .update-pulse-dot::before {
   content: '';
+  display: block;
   position: absolute;
   inset: -2px;
   border-radius: 50%;
   background-color: var(--neon-cyan);
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+  will-change: transform, opacity;
   animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  -webkit-animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.update-pulse-dot::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1.5px solid var(--neon-cyan);
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+  will-change: transform, opacity;
+  animation: radarRing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite 0.55s;
+  -webkit-animation: radarRing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite 0.55s;
   pointer-events: none;
 }
 
